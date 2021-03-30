@@ -2,7 +2,13 @@
 Coding Bootcamp - Project - 1
 
 
+# Introduction
 # User Story
-As a Marvel fan, 
-I want to see media related to my favourite Marvel characters,
-So that I can feel more connected with the Marvel universe. 
+**As a** Marvel fan, 
+<br>
+
+**I want to** see media related to my favourite Marvel characters,
+<br>
+
+**So that I** can feel more connected with the Marvel universe. 
+
