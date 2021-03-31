@@ -14,23 +14,110 @@
   <!-- Personal Style -->
   <link rel="stylesheet" href="./assets/css/style.css" />
 
-  <!-- TITLE -->
   <title>MARVEL PROJECT</title>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav>
-    <h1>Marvel Superhero Locator!</h1>
+   <!-- NAVIGATION BAR -->    
+   <nav class="navbar">
+    <div class="max-width">
+             <a href="#home">Home</a>
+             <a href="#locator">Search</a>
+             <a href="#gallery">Gallery</a>
+             <a href="#aboutus">About US</a>
+    </div>
+</nav>
+
+<!-- HOME SECTION -->
+<main class="home" id="home">
+   <div class="max-width">
+       <div class="home-content">
+           <h1 class="text-1">MARVEL</h1>
+           <br>
+           <h1 class="text-2">Superhero Locator</h1>
+       </div>
+   </div>
+</main>
+
+
+
+
+
+  <!-- SEARCH BAR   -->
+  <div id="locator">
+    <h2>To engage locator protocols, please enter which Superhero are you searching for...</h2>
     <form>
       <input class="search" type="search" placeholder="I want to look for...">
       <button class="searchBtn"><i class="fas fa-search"></i></button>
     </form>
-  </nav>
-  <!-- Hero Image -->
-  <section>
-    <img id="hero-image" src="./assets/images/PlaceholderImage.JPG" alt="Placeholder Image">
-  </section>
+  </div>
+
+
+
+
+
+  <!-- GALLERY SECTION -->
+  <div class="ia-container" id="gallery">
+				
+    <figure>
+      <img src="./assets/images/IronMan.jpg" alt="image01-Iron Man" />
+      <input type="radio" name="radio-set" checked="checked" />
+      <figcaption><span>BlaBlaBla</span></figcaption>
+      
+      <figure>
+        <img src="./assets/images/BlackPanter.jpg" alt="image02-Black Panter" />
+        <input type="radio" name="radio-set" />
+        <figcaption><span>BlaBlaBla</span></figcaption>
+        
+        <figure>
+          <img src="./assets/images/CaptainAmerica.jpg" alt="image03-Captain America" />
+          <input type="radio" name="radio-set" />
+          <figcaption><span>BlaBlaBla</span></figcaption>
+          
+          <figure>
+            <img src="./assets/images/Hulk.jpg" alt="image04-Hulk" />
+            <input type="radio" name="radio-set" />
+            <figcaption><span>BlaBlaBla</span></figcaption>
+            
+            <figure>
+              <img src="./assets/images/CaptainMarvel.jpg" alt="image05-Captain Marvel" />
+              <input type="radio" name="radio-set" />
+              <figcaption><span>BlaBlaBla</span></figcaption>
+              
+              <figure>
+                <img src="./assets/images/SpiderMan.jpg" alt="image06-SpiderMan" />
+                <input type="radio" name="radio-set" />
+                <figcaption><span>BlaBlaBla</span></figcaption>
+                    
+              </figure> 
+                
+            </figure>   
+              
+          </figure>
+            
+        </figure>
+        
+      </figure>
+      
+    </figure>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   <!-- JAVASCRIPT FILES -->

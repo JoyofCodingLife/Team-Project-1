@@ -28,7 +28,7 @@
 <br>
 
 ### Live URL
-
+https://joyofcodinglife.github.io/TeamProject-Marvel-Superhero-Locator/
 
 <br>
 
@@ -44,6 +44,10 @@ The following images show the web application's appearance.
 ![Website Wireframe](./assets/images/marvelWireframe.png)
 ![Website Flow](./assets/images/userProcessModelFlowV1.png)
 <br>
+
+Versions of Home Page
+![Website v1](./assets/images/v1.png)
+![Website v2](./assets/images/v2.png)
 
 ## Contributing
 
