@@ -42,7 +42,7 @@ The following images show the web application's appearance.
 
 ![Website Preview](./assets/images/WebsitePreview.png)
 ![Website Wireframe](./assets/images/marvelWireframe.png)
-![Website Flow](./assets/images/websiteFlow.png)
+![Website Flow](./assets/images/userProcessModelFlowV1.png)
 <br>
 
 ## Contributing
