@@ -48,25 +48,53 @@ function heroLocator(event) {
 // Search input
 
 // Autocomplete widget for search bar
-
-function testMarvelAPI() {
-
-    let requestMarvelUrl = "http://gateway.marvel.com/v1/public/comics?apikey=" + marvelPublicAPIKey;
-    fetch(requestMarvelUrl).then(function(response) {
-        // Decode the response body if it was successful
+function fetchJsonData(url) {
+    return fetch(url).then(function(response) {
         if (response.ok) {
             return response.json();
         } else {
-            return Promise.reject("Marvel API rejected request");
+            return Promise.reject(response);
         }
-    }).then(function(data) {
-        // This is the data we actually care about.
-        console.log(data);
-    }).catch(function(err) {
-        console.log(err);
-
     });
 
+
+}
+
+function buildApiUrl(apiPath) {
+    return `https://gateway.marvel.com/v1/public/${apiPath}?apikey=${marvelPublicAPIKey}`;
+}
+
+/**
+ * Repeatedly request heroes from the API to build a list of all heroes. We don't call this as part of the actual
+ * website's usage. Instead, we call it once to build a list of heroes that we can then use for autocomplete during
+ * search without having to constantly make new requests.
+ *
+ * See heroes.js for the list.
+ */
+function buildHeroList() {
+
+    let characterApiUrl = buildApiUrl("characters") + "&limit=100";
+    let allHeroList = [];
+
+    let handleResponse = function(jsonData) {
+        let data = jsonData.data;
+
+        data.results.forEach(function(result) {
+            allHeroList.push(result.name);
+        });
+
+        let currentCount = allHeroList.length;
+        if (currentCount < data.total) {
+            return fetchJsonData(characterApiUrl + `&offset=${currentCount}`).then(handleResponse);
+        }
+    };
+
+    fetchJsonData(characterApiUrl).then(handleResponse).then(function() {
+        console.log(`Got list of ${allHeroList.length} heroes, copy following line into heroes.js to update the list`);
+        console.log(JSON.stringify(allHeroList));
+    }).catch(function(err) {
+        console.log("Failed to build hero list: " + err);
+    });
 }
 
 // need a function to renderHeroResults (this will have us dynamically changing HTML and CSS)
@@ -76,5 +104,3 @@ function renderHeroResults() {
 
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
-
-testMarvelAPI();
