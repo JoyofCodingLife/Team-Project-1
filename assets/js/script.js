@@ -93,22 +93,29 @@ function buildApiUrl(apiPath) {
  */
 function buildHeroList() {
 
+    // We can't get more than 100 results per request and the default is 20. We use the maximum to reduce number of
+    // requests.
     let characterApiUrl = buildApiUrl("characters") + "&limit=100";
     let allHeroList = [];
 
+    // This function handles the response for one request of up to 100 results.
     let handleResponse = function(jsonData) {
         let data = jsonData.data;
 
+        // Add each hero name into our list.
         data.results.forEach(function(result) {
             allHeroList.push(result.name);
         });
 
+        // If we need to get more data, then we make another request and return that promise, and pass this function
+        // back as the handler so it runs like a loop.
         let currentCount = allHeroList.length;
         if (currentCount < data.total) {
             return fetchJsonData(characterApiUrl + `&offset=${currentCount}`).then(handleResponse);
         }
     };
 
+    // Start requesting chunks of data
     fetchJsonData(characterApiUrl).then(handleResponse).then(function() {
         console.log(`Got list of ${allHeroList.length} heroes, copy following line into heroes.js to update the list`);
         console.log(JSON.stringify(allHeroList));
