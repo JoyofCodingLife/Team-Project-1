@@ -1,13 +1,13 @@
 // List of API keys
 // // Marvel API key - 2abb8d4dbef38b7b61728089ea5eb10e
-let marvelAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
+const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
 
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
 let searchInputEl = document.querySelector(".search");
 
 // Function to call when the document loads (opacity)
-window.onload = function() {
+window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
 }
 
@@ -19,8 +19,8 @@ window.onload = function() {
 function cleanSearchParams() {
 
     // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
-    let herosearchParamsArr = document.location.search.split('&');
-  
+    let heroSearchParamsArr = document.location.search.split('&');
+
     // Get the query and format values
     let query = herosearchParamsArr[0].split('=').pop();
 
@@ -49,24 +49,32 @@ function heroLocator(event) {
 
 // Autocomplete widget for search bar
 
-// function to get API
-function getMarvelAPI() {
+function testMarvelAPI() {
 
-    let requestMarvelUrl = "developer.marvel.com";
+    let requestMarvelUrl = "http://gateway.marvel.com/v1/public/comics?apikey=" + marvelPublicAPIKey;
+    fetch(requestMarvelUrl).then(function(response) {
+        // Decode the response body if it was successful
+        if (response.ok) {
+            return response.json();
+        } else {
+            return Promise.reject("Marvel API rejected request");
+        }
+    }).then(function(data) {
+        // This is the data we actually care about.
+        console.log(data);
+    }).catch(function(err) {
+        console.log(err);
 
-    //  "http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150"
+    });
 
-    // API key 2abb8d4dbef38b7b61728089ea5eb10e
-
-
-
-};
+}
 
 // need a function to renderHeroResults (this will have us dynamically changing HTML and CSS)
 function renderHeroResults() {
 
-};
+}
 
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
 
+testMarvelAPI();
