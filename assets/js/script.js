@@ -34,7 +34,7 @@ function heroLocator(event) {
     event.preventDefault();
 
     // Variables needed for search function
-    let heroName = searchInputEl.value();
+    let heroName = searchInputEl.value;
 
     // If no hero name, return error
     if (!heroName) {
@@ -43,7 +43,27 @@ function heroLocator(event) {
         return;
     }
 
-};
+    // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
+    fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
+       let data = jsonData.data;
+
+       if (data.total === 0) {
+           console.error("No heroes found!");
+       } else {
+           // Always use the first result
+           let result = data.results[0];
+           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+
+           console.log(result.name);
+           console.log(result.description);
+           console.log(thumbnailUrl);
+
+       }
+    }).catch(function(err) {
+        console.log("Failed to get hero data!");
+    })
+
+}
 
 // Search input
 
@@ -104,3 +124,7 @@ function renderHeroResults() {
 
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
+
+$(searchInputEl).autocomplete({source: HeroList});
+
+
