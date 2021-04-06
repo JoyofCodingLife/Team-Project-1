@@ -131,10 +131,19 @@ input {
 
 #engageBtn:hover {
 	background-color: var(--marvel-red);
+	cursor: pointer;
 }
 
 .hide {
 	display: none;
+}
+
+#heroSearchForm {
+	border-radius: 0.5rem;
+	padding: 1rem;
+	margin: 1rem;
+	background-color: var(--marvel-red);
+	justify-content: center;
 }
 
 .searchBtn {
