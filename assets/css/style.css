@@ -146,6 +146,16 @@ input {
 	justify-content: center;
 }
 
+.ui-menu {
+	border: red solid 2px;
+	width: 300px;
+}
+
+.ui-menu-item {
+	background-color: var(--white);
+	color: var(--black);
+}
+
 .searchBtn {
     padding: 0.7rem;
     border-radius: 0.3rem;
