@@ -1,6 +1,9 @@
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
 let searchInputEl = document.querySelector(".search");
+let engageSearchEl = document.querySelector("#engageSearchProtocol");
+let heroSearchForm = document.querySelector("#heroSearchForm");
+let engageSearchBtn = document.querySelector("#engageBtn");
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -22,6 +25,16 @@ function cleanSearchParams() {
 
     getMarvelAPI(query);
 };
+
+// Engage function (to display search bar)
+function engageSearch() {
+
+    engageSearchEl.style.display = "none";
+    heroSearchForm.style.display = "flex";
+};
+
+// Engage button event listener
+engageSearchBtn.addEventListener("click", engageSearch);
 
 // Search function
 function heroLocator(event) {
