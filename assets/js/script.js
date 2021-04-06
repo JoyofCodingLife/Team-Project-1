@@ -63,6 +63,10 @@ function heroLocator(event) {
             let result = data.results[0];
             let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
 
+            // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
+            // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
+
+
             console.log(result.name);
             console.log(result.description);
             console.log(thumbnailUrl);
