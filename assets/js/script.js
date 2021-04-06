@@ -78,7 +78,7 @@ function heroLocator(event) {
 
 // Autocomplete widget for search bar
 function fetchJsonData(url) {
-    return fetch(url, { referrer: "localhost", referrerPolicy: "origin-when-cross-origin" }).then(function (response) {
+    return fetch(url).then(function (response) {
         if (response.ok) {
             return response.json();
         } else {
