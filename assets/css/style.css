@@ -167,7 +167,7 @@ input {
 
 
 
-/* Hero Section s
+/* Hero Section
 
 #hero-image {
     height: 50%;
@@ -180,6 +180,12 @@ input {
     position: relative;
 }
 */
+
+/* Uncomment hide class when ready to test */
+/* .hide {
+	display: none;
+	visibility: none;
+} */
 
 
 

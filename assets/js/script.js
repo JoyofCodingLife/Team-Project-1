@@ -67,6 +67,12 @@ function heroLocator(event) {
            let result = data.results[0];
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
 
+            // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
+            // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
+
+            // Note to self - path /v1/public/characters
+            showHeroCards(data);
+
            console.log(result.name);
            console.log(result.description);
            console.log(thumbnailUrl);
@@ -77,6 +83,34 @@ function heroLocator(event) {
     })
 
 }
+
+// Separate function to show hero cards
+function showHeroCards(data) {
+
+    let heroCardContainer = document.getElementById("heroCardContainer");
+
+
+    data.forEach((hero) => {
+
+        let heroImage = thumbnailUrl;
+        let heroName = data.result.name;
+        let heroBio = data.result.description;
+
+        // construct hero card layout
+
+        const heroCard = `
+        <div id="heroCard"> 
+        <img src=${heroImage} alt="This is an image of ${heroName}" />
+        <h4>${heroName}</h4>
+        <p>${heroBio}</p>
+        </div>
+        `;
+
+        // append herocard to container
+        heroCardContainer.innerHTML += heroCard;
+    });
+
+};
 
 // Search input
 
