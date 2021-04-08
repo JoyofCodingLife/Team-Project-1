@@ -146,49 +146,16 @@ function renderHeroResults() {
 }
 
 // YOUTUBE API section ----------------------------------------------
-
-//version 1
-function getVideo() {
-    let youtubeAPIURL = 'https://www.googleapis.com/youtube/v3/search'
-    $.ajax({
-      url: youtubeAPIURL,
-      type: "GET",
-      data: {
-          key: youTubeAPIKey,
-          q: "Thor" + "trailer",
-          part: "snippet",
-          maxResults: 1,
-          type: "video",
-          videoEmbeddable: true,
-      },
-      success: function(data){
-          embedVideo(data)
-      },
-      error: function(response){
-          console.log("Request Failed");
-      }
-    });
-  }
-
-function embedVideo(data) {
-  $("iframe").attr("src", "https://www.youtube.com/embed/" + data.items[0].id.videoId)
-  $("h3").text(data.items[0].snippet.title)
-  $(".description").text(data.items[0].snippet.description)
-}
-
-getVideo();
-
-// version 2
      //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=surfing&key=AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
      //"part": ["snippet"],
-     //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", - Marvel Entertainment Channel
+     //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
      //"maxResults": 25,
      //"order": "videoCount",
-     //"q": "surfing" - what we are looking for
+     //"q": "surfing" -> what we are looking for?
  
 function searchVideos() {
-    //let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
-    let youtube2APIURL =  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=thor&key=AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
+    var heroVideo = "SpiderMan"
+    let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroVideo}&key=${youTubeAPIKey}`;
     $.ajax ({
         url: youtube2APIURL,
         method: "GET",
@@ -201,10 +168,12 @@ function searchVideos() {
                 video: youtubeResponse.items[i].id.videoId,
             };
             let videoCard = $(`
-            <div>
-            <iframe src="https://www.youtube.com/embed/${videoInfo.video}"></iframe>
-            <h3>${videoInfo.title}</h3>
-            <p>${videoInfo.description}</p>
+            <div class="video-item">
+                <div class="video-wrap">
+                 <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
+                 <h3>${videoInfo.title}</h3>
+                 <p>${videoInfo.description}</p>
+                </div>
             </div>
             `);
             $(videoResultEl).append(videoCard);
