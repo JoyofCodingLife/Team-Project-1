@@ -257,11 +257,11 @@ input {
 /* GALLERY SECTION */
 
 .accordion {
-	width: 585px; /* width = ( (Number of images - 1) * 50px ) + 335px */ 
+	width: 935px; /* width = ( (Number of images - 1) * 50px ) + 335px */ 
 	margin: 20px auto;
 	overflow: hidden;
-	box-shadow: 1px 1px 4px rgba(0,0,0,0.08);
-	border: 7px solid rgba(255,255,255,0.6);
+	box-shadow: 1px 1px 4px rgb(35, 24, 196);
+	border: 7px solid var(--marvel-red);
 }
 
 .accordion figure {
@@ -363,8 +363,89 @@ input {
 }
 
 
+/* ABOUT US SECTION */
+#aboutus {
+	width: 100%;
+	height: 500px;
+	text-align: center;
+}
 
-/* Responsive Layout */ 
+.agentCard {
+	float: left;
+	width: 33.33%;
+	background-color: transparent;
+  	border: 1px solid #f1f1f1;
+  	perspective: 1000px; /* the 3D effect */
+}
+
+.agentInfo {
+	background-color: blue ;
+	text-align: center;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+	position: relative;
+  	width: 100%;
+  	height: 100%;
+  	text-align: center;
+  	transition: transform 0.8s;
+  	transform-style: preserve-3d;
+	  height: 400px;
+}	
+	
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.agentCard:hover .flip-card-inner {
+  	transform: rotateY(180deg);
+}
+
+ /* Position the front and back side */
+ .flip-card-front, .flip-card-back {
+  	position: absolute;
+  	width: 100%;
+  	height: 100%;
+  	-webkit-backface-visibility: hidden; /* Safari */
+  	backface-visibility: hidden;
+	  height: inherit;
+}
+
+.flip-card-front div, .flip-card-back div {
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+
+#agent_kate_front {
+	background-image: url(../images/Agents/AgentKate.jpg);
+}
+
+#agent_kate_back {
+	background-image: url(../images/Agents/AgentKate.jpg);
+}
+
+#agent_aaron_front {
+	background-image: url(../images/Agents/AgentAaron.JPG);
+}
+
+#agent_aaron_back {
+	background-image: url(../images/Agents/AlterAaron.jpg);
+}
+
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  	background-color: #bbb;
+  	color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  	background-color: dodgerblue;
+  	color: white;
+  	transform: rotateY(180deg);
+}
+
+/* RESPONSIVE LAYOUT */ 
 @media screen and (max-width: 720px) {
     .accordion { 
 		width: 540px; 
@@ -414,8 +495,3 @@ input {
 	} 
 
 }
-
-
-
-
-
