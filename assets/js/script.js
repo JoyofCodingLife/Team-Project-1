@@ -1,7 +1,8 @@
 // List of API keys
 // // Marvel API key - 2abb8d4dbef38b7b61728089ea5eb10e
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
-const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ"
+const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
+const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
@@ -9,6 +10,7 @@ let searchInputEl = document.querySelector(".search");
 let engageSearchEl = document.querySelector("#engageSearchProtocol");
 let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
+let videoResultEl = $("#videoResults");
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -144,10 +146,12 @@ function renderHeroResults() {
 }
 
 // YOUTUBE API section ----------------------------------------------
+
+//version 1
 function getVideo() {
-    let youTubeAPIURL = 'https://www.googleapis.com/youtube/v3/search'
+    let youtubeAPIURL = 'https://www.googleapis.com/youtube/v3/search'
     $.ajax({
-      url: youTubeAPIURL,
+      url: youtubeAPIURL,
       type: "GET",
       data: {
           key: youTubeAPIKey,
@@ -167,12 +171,47 @@ function getVideo() {
   }
 
 function embedVideo(data) {
-  $("iframe").attr("src", 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+  $("iframe").attr("src", "https://www.youtube.com/embed/" + data.items[0].id.videoId)
   $("h3").text(data.items[0].snippet.title)
   $(".description").text(data.items[0].snippet.description)
 }
 
 getVideo();
+
+// version 2
+     //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=surfing&key=AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
+     //"part": ["snippet"],
+     //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", - Marvel Entertainment Channel
+     //"maxResults": 25,
+     //"order": "videoCount",
+     //"q": "surfing" - what we are looking for
+ 
+function searchVideos() {
+    //let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+    let youtube2APIURL =  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=thor&key=AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
+    $.ajax ({
+        url: youtube2APIURL,
+        method: "GET",
+    }). then (function(youtubeResponse) {
+        $(videoResultEl).empty();
+        for (let i = 0; i < 5; i++ ) {
+            let videoInfo = {
+                title: youtubeResponse.items[i].snippet.title,
+                description: youtubeResponse.items[i].snippet.description,
+                video: youtubeResponse.items[i].id.videoId,
+            };
+            let videoCard = $(`
+            <div>
+            <iframe src="https://www.youtube.com/embed/${videoInfo.video}"></iframe>
+            <h3>${videoInfo.title}</h3>
+            <p>${videoInfo.description}</p>
+            </div>
+            `);
+            $(videoResultEl).append(videoCard);
+        }
+    });
+}
+searchVideos ();
 
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
