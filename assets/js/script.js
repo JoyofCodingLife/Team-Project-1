@@ -8,6 +8,10 @@ let searchInputEl = document.querySelector(".search");
 let engageSearchEl = document.querySelector("#engageSearchProtocol");
 let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
+let errorMessageEl = document.querySelector("#error-message")
+let hydraLogoEl = document.querySelector("#hydra-logo")
+let warningMessageEl = document.querySelector("#warning-message")
+let wrongHeroEl = document.querySelector("#wrong-hero");
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -53,6 +57,7 @@ function heroLocator(event) {
     if (!heroName) {
         // console.error is a placeholder for now. Have something more dynamic that alerts user to enter again.
         console.error("Hero not found. Probably undercover at HYDRA, please try again.");
+
         return;
     }
 
@@ -61,9 +66,13 @@ function heroLocator(event) {
        let data = jsonData.data;
 
        if (data.total === 0) {
+           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again.";
+           hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
+           warningMessageEl.innerHTML = "Warning:";
            console.error("No heroes found!");
        } else {
            // Always use the first result
+           wrongHeroEl.style.display = "none";
            let result = data.results[0];
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
 
