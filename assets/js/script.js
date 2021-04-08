@@ -55,24 +55,29 @@ function heroLocator(event) {
     }
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
-    fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function (jsonData) {
+    fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
 
         // Main variables from Marvel API - v1/public/characters
         let data = jsonData.data;
+        // let result = data.results[0];
+        // let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+        // let comics = data.results[0].comics;
+        // let officialUrls = data.results[0].urls;
+        // let officialDetail = officialUrls[0];
+        // let officialWiki = officialUrls[1];
+        // let data = jsonData.data;
 
-
+        
         // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
         // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
 
         if (data.total !== 0) {
 
             showHeroCards(data);
-        } else {
-            return console.error("No heroes found!")
-        }
-        ;
 
-    }).catch(function (err) {
+        } else {
+            return console.error("No heroes found!")};
+    }).catch(function(err) {
         console.log(err);
         console.log("Failed to get hero data!");
     })
@@ -103,7 +108,7 @@ function showHeroCards(hero) {
     // construct hero card layout
 
     const heroCard = `
-        <h3>HERO LOCATIONS FOUND</h3>
+        <h3>Hero File Found: ${heroName}</h3>
         <div class="heroCard"> 
         <img src=${heroImage} alt="This is an image of ${heroName}" />
         <h4>${heroName}</h4>
@@ -117,19 +122,16 @@ function showHeroCards(hero) {
 
     // append herocard to container
     heroCardContainer.innerHTML += heroCard;
+
 };
-
-
-
 
 // Search input
 
 // Autocomplete widget for search bar
 function fetchJsonData(url) {
-    return fetch(url).then(function (response) {
+    return fetch(url).then(function(response) {
         if (response.ok) {
-            return response.json();
-        }
+            return response.json()};
         return Promise.reject(response);
     });
 }
@@ -153,11 +155,11 @@ function buildHeroList() {
     let allHeroList = [];
 
     // This function handles the response for one request of up to 100 results.
-    let handleResponse = function (jsonData) {
+    let handleResponse = function(jsonData) {
         let data = jsonData.data;
 
         // Add each hero name into our list.
-        data.results.forEach(function (result) {
+        data.results.forEach(function(result) {
             allHeroList.push(result.name);
         });
 
@@ -170,10 +172,10 @@ function buildHeroList() {
     };
 
     // Start requesting chunks of data
-    fetchJsonData(characterApiUrl).then(handleResponse).then(function () {
+    fetchJsonData(characterApiUrl).then(handleResponse).then(function() {
         console.log(`Got list of ${allHeroList.length} heroes, copy following line into heroes.js to update the list`);
         console.log(JSON.stringify(allHeroList));
-    }).catch(function (err) {
+    }).catch(function(err) {
         console.log("Failed to build hero list: " + err);
     });
 }
