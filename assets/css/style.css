@@ -323,6 +323,7 @@ input {
   	text-align: center;
   	transition: transform 0.8s;
   	transform-style: preserve-3d;
+	  height: 400px;
 }	
 	
 /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -337,7 +338,32 @@ input {
   	height: 100%;
   	-webkit-backface-visibility: hidden; /* Safari */
   	backface-visibility: hidden;
+	  height: inherit;
 }
+
+.flip-card-front div, .flip-card-back div {
+
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+
+#agent_kate_front {
+	background-image: url(../images/Agents/AgentKate.jpg);
+}
+
+#agent_kate_back {
+	background-image: url(../images/Agents/AgentKate.jpg);
+}
+
+#agent_aaron_front {
+	background-image: url(../images/Agents/AgentAaron.JPG);
+}
+
+#agent_aaron_back {
+	background-image: url(../images/Agents/AlterAaron.jpg);
+}
+
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
