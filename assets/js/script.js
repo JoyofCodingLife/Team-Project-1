@@ -1,6 +1,7 @@
 // List of API keys
 // // Marvel API key - 2abb8d4dbef38b7b61728089ea5eb10e
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
+const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ"
 
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
@@ -142,6 +143,38 @@ function renderHeroResults() {
 
 }
 
+// YOUTUBE API section ----------------------------------------------
+function getVideo() {
+    let youTubeAPIURL = 'https://www.googleapis.com/youtube/v3/search'
+    $.ajax({
+      url: youTubeAPIURL,
+      type: "GET",
+      data: {
+          key: youTubeAPIKey,
+          q: "Thor" + "trailer",
+          part: "snippet",
+          maxResults: 1,
+          type: "video",
+          videoEmbeddable: true,
+      },
+      success: function(data){
+          embedVideo(data)
+      },
+      error: function(response){
+          console.log("Request Failed");
+      }
+    });
+  }
+
+function embedVideo(data) {
+  $("iframe").attr("src", 'https://www.youtube.com/embed/' + data.items[0].id.videoId)
+  $("h3").text(data.items[0].snippet.title)
+  $(".description").text(data.items[0].snippet.description)
+}
+
+getVideo();
+
+// EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
 
