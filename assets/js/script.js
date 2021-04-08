@@ -77,7 +77,46 @@ function heroLocator(event) {
        }
     }).catch(function(err) {
         console.log("Failed to get hero data!");
-    })
+    });
+
+    function searchVideos() {
+
+        // YOUTUBE API section ----------------------------------------------
+        //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
+        //"part": ["snippet"],
+        //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
+        //"maxResults": 25,
+        //"order": "videoCount",
+        //"q": "surfing" -> what we are looking for?
+
+        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+        $.ajax ({
+            url: youtube2APIURL,
+            method: "GET",
+        }). then (function(youtubeResponse) {
+            $(videoResultEl).empty();
+            for (let i = 0; i < 5; i++ ) {
+                let videoInfo = {
+                    title: youtubeResponse.items[i].snippet.title,
+                    description: youtubeResponse.items[i].snippet.description,
+                    video: youtubeResponse.items[i].id.videoId,
+                };
+                let videoCard = $(`
+                <div class="video-item">
+                    <div class="video-wrap">
+                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
+                     <h3>${videoInfo.title}</h3>
+                     <p>${videoInfo.description}</p>
+                    </div>
+                </div>
+                `);
+                $(videoResultEl).append(videoCard);
+            }
+        });
+    }
+    searchVideos ();
+    
+    
 
 }
 
@@ -153,35 +192,6 @@ function renderHeroResults() {
      //"order": "videoCount",
      //"q": "surfing" -> what we are looking for?
  
-function searchVideos() {
-    var heroVideo = "SpiderMan"
-    let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroVideo}&key=${youTubeAPIKey}`;
-    $.ajax ({
-        url: youtube2APIURL,
-        method: "GET",
-    }). then (function(youtubeResponse) {
-        $(videoResultEl).empty();
-        for (let i = 0; i < 5; i++ ) {
-            let videoInfo = {
-                title: youtubeResponse.items[i].snippet.title,
-                description: youtubeResponse.items[i].snippet.description,
-                video: youtubeResponse.items[i].id.videoId,
-            };
-            let videoCard = $(`
-            <div class="video-item">
-                <div class="video-wrap">
-                 <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
-                 <h3>${videoInfo.title}</h3>
-                 <p>${videoInfo.description}</p>
-                </div>
-            </div>
-            `);
-            $(videoResultEl).append(videoCard);
-        }
-    });
-}
-searchVideos ();
-
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
