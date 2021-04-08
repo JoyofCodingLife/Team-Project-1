@@ -59,15 +59,7 @@ function heroLocator(event) {
 
         // Main variables from Marvel API - v1/public/characters
         let data = jsonData.data;
-        // let result = data.results[0];
-        // let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
-        // let comics = data.results[0].comics;
-        // let officialUrls = data.results[0].urls;
-        // let officialDetail = officialUrls[0];
-        // let officialWiki = officialUrls[1];
-        // let data = jsonData.data;
-
-        
+ 
         // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
         // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
 
