@@ -12,11 +12,10 @@ let engageSearchBtn = document.querySelector("#engageBtn");
 // Function to call when the document loads (opacity)
 window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
-}
+};
 
 // Favourites bar on the left/right of page has localStorage favourites - rename favourites to SHIELD related
 // localStorage to store user's favourite heroes (will shorten loading screen since data is saved locally)
-
 
 // Function to clean up search function parameters
 function cleanSearchParams() {
@@ -63,22 +62,29 @@ function heroLocator(event) {
         let result = data.results[0];
         let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
         let comics = data.results[0].comics;
-        let comicsCollection = comics.collectionURI;
+        let officialUrls = data.results[0].urls;
+        let officialDetail = officialUrls[0];
+        let officialWiki = officialUrls[1];
         
         // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
         // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
 
         if (data.total !== 0) {
 
-            showHeroCards(data.total);
-
             console.log(thumbnailUrl);
             console.log(result.name);
             console.log(result.description);
             console.log(comics);
-        }
-        return console.error("No heroes found!");
+            console.log(officialUrls);
+            console.log(officialDetail);
+            console.log(officialWiki);
+
+            showHeroCards(data);
+        } else {
+            return console.error("No heroes found!")};
+        
     }).catch(function(err) {
+        console.log(err);
         console.log("Failed to get hero data!");
     })
 
@@ -99,14 +105,20 @@ function showHeroCards(data) {
         let heroImage = thumbnailUrl;
         let heroName = data.results.name;
         let heroBio = data.results.description;
+        let heroDetail = officialDetail.url;
+        let heroWiki = officialWiki.url;
 
         // construct hero card layout
 
         const heroCard = `
-        <div id="heroCard"> 
+        <div class="heroCard"> 
         <img src=${heroImage} alt="This is an image of ${heroName}" />
         <h4>${heroName}</h4>
         <p>${heroBio}</p>
+        <ul>
+        <li>View official hero detail <a href="${heroDetail}">here></a>.</li>
+        <li>View official hero wiki <a href="${heroWiki}">here</a>.</li>
+        </ul>
         </div>
         `;
 

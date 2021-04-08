@@ -8,8 +8,9 @@ font-family: 'Noto Sans KR', sans-serif;
 :root {
     --white: #ffffff;
     --marvel-red:  #ed1d24;
+	--gentlered: rgb(214, 148, 148);
     --black: #000000;
-	--shield-blue: 
+	--shield-blue: rgb(28, 28, 99);
 }
 
 *, *::before, *::after {
@@ -187,9 +188,24 @@ input {
 	visibility: none;
 } */
 
+/* Hero Card */
+.heroCard {
+	list-style-type: none;
+	background-color: var(--shield-blue);
+	color: var(--white);
+	font-size: medium;
+}
 
+.heroCard a {
+	text-decoration: none;
+	color: var(--gentlered);
+	cursor: pointer;
+}
 
-
+.heroCard a:hover {
+	font-size: larger;
+	color: var(--white);
+}
 
 
 /* GALLERY SECTION */
