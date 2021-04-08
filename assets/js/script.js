@@ -43,7 +43,6 @@ engageSearchBtn.addEventListener("click", engageSearch);
 // Search function
 function heroLocator(event) {
 
-    // Prevents page from auto-refreshing
     event.preventDefault();
 
     // Variables needed for search function
@@ -52,49 +51,54 @@ function heroLocator(event) {
     // If no hero name, return error
     if (!heroName) {
         // console.error is a placeholder for now. Have something more dynamic that alerts user to enter again.
-        console.error("Hero not found. Probably undercover at HYDRA, please try again.");
+        console.error("Hero not found. Probably undercover at HYDRA, please try again later.");
         return;
     }
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
-       let data = jsonData.data;
 
-       if (data.total === 0) {
-           console.error("No heroes found!");
-       } else {
-           // Always use the first result
-           let result = data.results[0];
-           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+        // Main variables from Marvel API - v1/public/characters
+        let data = jsonData.data;
+        let result = data.results[0];
+        let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+        let comics = data.results[0].comics;
+        let comicsCollection = comics.collectionURI;
+        
+        // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
+        // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
 
-            // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
-            // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
+        if (data.total !== 0) {
 
-            // Note to self - path /v1/public/characters
-            showHeroCards(data);
+            showHeroCards(data.total);
 
-           console.log(result.name);
-           console.log(result.description);
-           console.log(thumbnailUrl);
-
-       }
+            console.log(thumbnailUrl);
+            console.log(result.name);
+            console.log(result.description);
+            console.log(comics);
+        }
+        return console.error("No heroes found!");
     }).catch(function(err) {
         console.log("Failed to get hero data!");
     })
 
 }
 
+// Function to get comic data
+// function getComicData() {
+
+// };
+
 // Separate function to show hero cards
 function showHeroCards(data) {
 
     let heroCardContainer = document.getElementById("heroCardContainer");
 
-
     data.forEach((hero) => {
 
         let heroImage = thumbnailUrl;
-        let heroName = data.result.name;
-        let heroBio = data.result.description;
+        let heroName = data.results.name;
+        let heroBio = data.results.description;
 
         // construct hero card layout
 
@@ -117,14 +121,9 @@ function showHeroCards(data) {
 // Autocomplete widget for search bar
 function fetchJsonData(url) {
     return fetch(url).then(function(response) {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return Promise.reject(response);
-        }
+        if (response.ok) return response.json();
+        return Promise.reject(response);
     });
-
-
 }
 
 function buildApiUrl(apiPath) {
