@@ -207,6 +207,12 @@ function renderHeroResults() {
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
+searchInputEl.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        searchButtonEl.click();
+    }
+});
 
 $(searchInputEl).autocomplete({source: HeroList});
 
