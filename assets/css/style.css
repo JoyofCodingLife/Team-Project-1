@@ -9,7 +9,7 @@ font-family: 'Noto Sans KR', sans-serif;
     --white: #ffffff;
     --marvel-red:  #ed1d24;
     --black: #000000;
-	--shield-blue: 
+	--shield-blue:
 }
 
 *, *::before, *::after {
@@ -154,6 +154,16 @@ input {
 .ui-menu-item {
 	background-color: var(--white);
 	color: var(--black);
+}
+
+
+.ui-menu-item:hover {
+	background-color: var(--marvel-red);
+	color: var(--white);
+}
+
+.ui-widget.ui-widget-content {
+	line-height: 1.5;
 }
 
 .searchBtn {
