@@ -67,13 +67,15 @@ function heroLocator(event) {
         return;
     }
 
+
+
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
        let data = jsonData.data;
 
        if (data.total === 0) {
-           errorMessageEl.innerHTML = "Hero not found. " + "\n" +
-               "Probably undercover at HYDRA, please try again later.";
+           wrongHeroEl.style.display = "inline-block";
+           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again later.";
            hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
            warningMessageEl.innerHTML = "Warning:";
            console.error("No heroes found!");
