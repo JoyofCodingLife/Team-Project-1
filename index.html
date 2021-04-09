@@ -9,6 +9,7 @@
   <!-- STYLE FILES -->
   <!-- JavaScript for Icons from FontAwesome -->
   <script src="https://kit.fontawesome.com/1228d6a68f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
   <!-- Reset Style -->
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <!-- Personal Style -->
@@ -47,7 +48,14 @@
     <div id="heroSearchForm" class="hide">
       <input class="search" type="search" placeholder="Enter Hero Name.">
       <button class="searchBtn"><i class="fas fa-search"></i></button>
+
     </div>
+      <div id="wrong-hero">
+          <h1 id="warning-message"></h1>
+          <img id="hydra-logo"/>
+          <h2 id="error-message"></h2>
+      </div>
+
   </div>
 
   <!-- RESULT CARDS SECTION -->
