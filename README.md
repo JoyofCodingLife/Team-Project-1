@@ -28,7 +28,7 @@
 <br>
 
 ### Live URL
-https://joyofcodinglife.github.io/TeamProject-Marvel-Superhero-Locator/
+https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
 
 <br>
 
