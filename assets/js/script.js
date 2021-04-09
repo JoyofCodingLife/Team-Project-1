@@ -72,7 +72,8 @@ function heroLocator(event) {
        let data = jsonData.data;
 
        if (data.total === 0) {
-           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again.";
+           errorMessageEl.innerHTML = "Hero not found. " + "\n" +
+               "Probably undercover at HYDRA, please try again later.";
            hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
            warningMessageEl.innerHTML = "Warning:";
            console.error("No heroes found!");

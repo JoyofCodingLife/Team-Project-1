@@ -9,9 +9,7 @@ font-family: 'Noto Sans KR', sans-serif;
     --white: #ffffff;
     --marvel-red:  #ed1d24;
     --black: #000000;
-
-
-	--shield-blue:
+	/*--shield-blue:*/
 
 }
 
@@ -167,6 +165,11 @@ input {
 #error-message {
 	padding: 4rem;
 }
+#wrong-hero {
+	width: 80%;
+	display: inline-block;
+}
+
 
 #hydra-logo {
 	width: 10rem;
@@ -175,7 +178,7 @@ input {
 #warning-message {
 	padding: 4rem;
 	color: var(--marvel-red);
-
+}
 
 .ui-menu-item:hover {
 	background-color: var(--marvel-red);
