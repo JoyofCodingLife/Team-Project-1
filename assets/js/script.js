@@ -18,6 +18,13 @@ let wrongHeroEl = document.querySelector("#wrong-hero");
 
 let videoResultEl = $("#videoResults");
 
+// Storage
+let favouriteHeroList = [];
+let STORAGE_FAV_HERO_KEY = "favourite-hero";
+let storedFavHeros = localStorage.getItem(STORAGE_FAV_HERO_KEY);
+if (storedFavHeros !==null) {
+    favouriteHeroList = JSON.parse(storedFavHeros);
+}
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -51,13 +58,14 @@ function engageSearch() {
 engageSearchBtn.addEventListener("click", engageSearch);
 
 // Search function
-function heroLocator(event) {
+function heroLocator(heroName) {
 
-    // Prevents page from auto-refreshing
-    event.preventDefault();
+    // Storage
+    favouriteHeroList.unshift(heroName);
+    favouriteHeroList.splice(6);
+    displayFavouriteHeroList();
+    localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(favouriteHeroList));
 
-    // Variables needed for search function
-    let heroName = searchInputEl.value;
 
     // If no hero name, return error
     if (!heroName) {
@@ -194,9 +202,18 @@ function buildHeroList() {
     });
 }
 
-// need a function to renderHeroResults (this will have us dynamically changing HTML and CSS)
-function renderHeroResults() {
 
+function displayFavouriteHeroList() {
+    let favouriteHeroContainer = $("#favourite-hero");
+    favouriteHeroContainer.find("button").remove();
+    favouriteHeroList.forEach(function (heroName) {
+        let favouriteHeroButton = $("<button><button>")
+        favouriteHeroButton.append(heroName);
+        favouriteHeroButton.appendTo(favouriteHeroContainer);
+        favouriteHeroButton.click(function () {
+            heroLocator(heroName);
+        })
+    })
 }
 
 // YOUTUBE API section ----------------------------------------------
@@ -209,14 +226,19 @@ function renderHeroResults() {
  
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
-searchButtonEl.addEventListener("click", heroLocator);
+searchButtonEl.addEventListener("click", function (event) {
+    heroLocator(searchInputEl.value);
+
+});
 searchInputEl.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         searchButtonEl.click();
     }
+
 });
 
 $(searchInputEl).autocomplete({source: HeroList});
+displayFavouriteHeroList();
 
 
