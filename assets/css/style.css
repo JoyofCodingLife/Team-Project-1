@@ -152,7 +152,7 @@ input {
 	width: 300px;
 }
 
-.ui-menu-item {
+.ui-menu-item-wrapper {
 	background-color: var(--white);
 	color: var(--black);
 }
@@ -160,6 +160,16 @@ input {
 
 .ui-widget.ui-widget-content {
 	line-height: 1.5;
+}
+.ui-menu-item-wrapper:hover {
+	background-color: var(--marvel-red);
+	color: var(--white);
+	border: var(--marvel-red);
+}
+
+.ui-widget.ui-widget-content {
+	line-height: 1.5;
+
 }
 
 #error-message {
@@ -179,15 +189,7 @@ input {
 	color: var(--marvel-red);
 }
 
-.ui-menu-item:hover {
-	background-color: var(--marvel-red);
-	color: var(--white);
-}
 
-.ui-widget.ui-widget-content {
-	line-height: 1.5;
-
-}
 
 .searchBtn {
     padding: 0.7rem;
