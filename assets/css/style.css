@@ -189,24 +189,45 @@ input {
 } */
 
 /* Hero Card */
-.heroCard {
+#heroCard {
+	display: flex;
 	list-style-type: none;
 	background-color: var(--shield-blue);
 	color: var(--white);
-	font-size: medium;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: center;
+
 }
 
-.heroCard a {
+#heroCardTitle {
+	/* display: inline-block; */
+	margin: 0 auto;
+	padding: 3px;
+	border: 1px black;
+	font-size: 30px;
+}
+
+/* .heroImg {
+	position: relative;
+} */
+
+#heroCard a {
 	text-decoration: none;
 	color: var(--gentlered);
 	cursor: pointer;
 }
 
-.heroCard a:hover {
+#heroCard a:hover {
 	font-size: larger;
 	color: var(--white);
 }
 
+.heroDetails {
+	font-size: 24px;
+	padding: 0.5rem;
+	/* line-height: 200%; */
+}
 
 /* GALLERY SECTION */
 

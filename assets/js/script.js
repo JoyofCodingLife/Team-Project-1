@@ -8,6 +8,9 @@ let searchInputEl = document.querySelector(".search");
 let engageSearchEl = document.querySelector("#engageSearchProtocol");
 let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
+// let heroCardContainer = document.querySelector("#heroLocatorResults");    
+let heroCardContainer = document.querySelector("#heroCardContainer");
+
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -59,14 +62,10 @@ function heroLocator(event) {
 
         // Main variables from Marvel API - v1/public/characters
         let data = jsonData.data;
- 
-        // Aaron :) you can add the data paths in here to get larger images, info, comic, etc. You can also append/
-        // add classes to your html here. E.g (in jQuery - $(<"insert id/class">).addClass("thumbnailSize") )
 
         if (data.total !== 0) {
 
             showHeroCards(data);
-
         } else {
             return console.error("No heroes found!")};
     }).catch(function(err) {
@@ -77,14 +76,12 @@ function heroLocator(event) {
 }
 
 // Function to get comic data
-// function getComicData() {
+function getHeroComicData() {
 
-// };
+};
 
 // Separate function to show hero cards
 function showHeroCards(hero) {
-
-    let heroCardContainer = document.getElementById("heroCardContainer");
 
     let result = hero.results[0];
     let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
@@ -100,21 +97,30 @@ function showHeroCards(hero) {
     // construct hero card layout
 
     const heroCard = `
+        <div id="heroCard"> 
+        <div id="heroCardTitle">
         <h3>Hero File Found: ${heroName}</h3>
-        <div class="heroCard"> 
+        </div>
+        <div class="heroImg">
         <img src=${heroImage} alt="This is an image of ${heroName}" />
+        </div>
+        <div class="heroDetails">
         <h4>${heroName}</h4>
-        <p>${heroBio}</p>
-        <ul>
-        <li>View official hero detail <a href="${heroDetail}">here></a>.</li>
-        <li>View official hero wiki <a href="${heroWiki}">here</a>.</li>
-        </ul>
+        <h6>${heroBio}</h6>
+        <p>View official hero detail <a href="${heroDetail}">here</a>.</p>
+        <p>View official hero wiki <a href="${heroWiki}">here</a>.</p>
+        </div>
         </div>
         `;
 
     // append herocard to container
     heroCardContainer.innerHTML += heroCard;
 
+};
+
+// Function to clear contents of hero card
+function clearHeroCards() {
+    heroCardContainer.innerHTML = "";
 };
 
 // Search input
@@ -178,7 +184,10 @@ function renderHeroResults() {
 }
 
 // Search button event listener
-searchButtonEl.addEventListener("click", heroLocator);
+searchButtonEl.addEventListener("click", function(event){
+    clearHeroCards();
+    heroLocator(event);
+});
 
 $(searchInputEl).autocomplete({source: HeroList});
 
