@@ -10,6 +10,7 @@ let searchInputEl = document.querySelector(".search");
 let engageSearchEl = document.querySelector("#engageSearchProtocol");
 let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
+let mostWantedEl = document.querySelector("#most-wanted");
 
 let errorMessageEl = document.querySelector("#error-message")
 let hydraLogoEl = document.querySelector("#hydra-logo")
@@ -52,6 +53,8 @@ function engageSearch() {
 
     engageSearchEl.style.display = "none";
     heroSearchForm.style.display = "flex";
+    mostWantedEl.style.display = "block";
+
 };
 
 // Engage button event listener

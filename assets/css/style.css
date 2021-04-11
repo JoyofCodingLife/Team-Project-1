@@ -441,7 +441,7 @@ input {
   	height: 100%;
   	-webkit-backface-visibility: hidden; /* Safari */
   	backface-visibility: hidden;
-	  height: inherit;
+	 height: inherit;
 }
 
 .flip-card-front div, .flip-card-back div {
