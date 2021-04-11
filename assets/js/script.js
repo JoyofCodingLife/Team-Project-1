@@ -204,10 +204,11 @@ function buildHeroList() {
 
 
 function displayFavouriteHeroList() {
+
     let favouriteHeroContainer = $("#favourite-hero");
     favouriteHeroContainer.find("button").remove();
     favouriteHeroList.forEach(function (heroName) {
-        let favouriteHeroButton = $("<button><button>")
+        let favouriteHeroButton = $("<button></button>")
         favouriteHeroButton.append(heroName);
         favouriteHeroButton.appendTo(favouriteHeroContainer);
         favouriteHeroButton.click(function () {
