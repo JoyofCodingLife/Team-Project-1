@@ -212,7 +212,7 @@ input {
 	color: var(--white); 
 }  */
 
-.id-card-wrapper {
+.hero-card-wrapper {
 	/* height: 100vh; */
 	display: flex;
 	background-color: #122023;
@@ -245,7 +245,6 @@ input {
 	border-radius: 50%;
 	display: block;
 	box-shadow: 0px 0px 4px 3px #12a0a0;
-
 }
 
 .dp-arc-outer {
@@ -263,6 +262,9 @@ input {
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
+
+/* To define the arc animation, utilisng @keyframes . 
+To set the beginning and end state of animation, we use the keywords from and to. */
 
 @keyframes rotate-anticlock {
 	from {
@@ -365,21 +367,86 @@ input {
 
 /* HERO COMICS CARD SECTION */
 
-/* #comicsCard {
+.comic-layout-wrapper {
+	/* height: 100vh; */
+	display: flex;
+	background-color: #122023;
+	width: 100%;
 
 }
-
-#comicsCardTitle {
-
+.comics-card {
+	flex-basis: 100%;
+	border: 2px solid #0AE0DF;
+	max-width: 40em;
+	margin: auto;
+	color: #fff;
+	padding: 1em;
+	box-shadow: 0px 0px 3px 1px #12a0a0, inset 0px 0px 3px 1px #12a0a0;
 }
 
-#comicImg {
-
+.comic-profile-layout {
+	display: flex;
 }
 
-#comicDetails {
+.comicDP {
+	flex-basis: 50%;
+	position: relative;
+	height: fit-content;
+	align-self: center;
+}
 
+.comicDP img {
+	max-width: 100%;
+	border-radius: 10%;
+	display: block;
+	box-shadow: 0px 0px 4px 3px #12a0a0;
+}
+
+/* #comicDetails {
+	background-color: var(--white);
 } */
+
+.comicDetails {
+	flex-grow: 50%;
+	padding: 1em;
+	font-family: 'Orbitron', sans-serif;
+}
+
+.comicDetails h1 {
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 0px 0px 4px #12a0a0;
+	letter-spacing: 1px;
+	margin: 0px;
+	font-size: 34px;
+}
+
+.comicDetails h3 {
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 0px 0px 4px #12a0a0;
+	letter-spacing: 1px;
+	margin: 0px;
+	padding-top: 0.5rem;
+	line-height: 1.6;
+	text-align: center;
+	font-size: 20px;
+}
+
+.comicDetails p {
+	padding-top: 0.5rem;
+	line-height: 1.6;
+	text-align: center;
+}
+
+#comicsCard a {
+	text-decoration: none;
+	color: var(--gentlered);
+	cursor: pointer;
+}
+
+#comicsCard a:hover {
+	font-size: larger;
+	color: #12a0a0;
+}
 
 /* RESULT VIDEOS SECTION */
 .video-item {

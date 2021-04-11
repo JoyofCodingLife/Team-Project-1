@@ -167,21 +167,20 @@ function displayComicData(data) {
     let comicTitle = result.title;
     let comicThumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
     let comicCreator = result.creators.items[0].name;
-    let comicDescription = result.description;
+    let comicInfo = result.urls[0].url;
     
     const comicCard = `
-    <div id="comicsCard"> 
-    <div id="comicsCardTitle">
-    <h3>Hero File Found: ${comicTitle}</h3>
-    </div>
-    <div class="comicImg">
-    <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
-    </div>
-    <div class="comicDetails">
-    <h4>${comicTitle}</h4>
-    <h6>This comic was created by: ${comicCreator}.</h6>
-    <p>${comicDescription}</p>
-    </div>
+    <div id="comicsCard" class="comics-card"> 
+        <div class="comic-profile-layout">
+            <div class="comicDP">
+                <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
+            </div>
+            <div class="comicDetails">
+                <h1>${comicTitle}</h1>
+                <h3>Editor: ${comicCreator}.</h3>
+                <p><a href="${comicInfo}" target="_blank">Official Comic Info</a>.</p>
+            </div>
+        </div>
     </div>
     `;
     
