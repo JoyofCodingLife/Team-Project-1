@@ -213,7 +213,11 @@ function displayFavouriteHeroList() {
         favouriteHeroButton.appendTo(favouriteHeroContainer);
         favouriteHeroButton.click(function () {
             heroLocator(heroName);
-        })
+            // searchInputEl.scrollIntoView(true);
+            $('html,body').animate({
+                    scrollTop: $(".search").offset().top},
+                'slow');
+        });
     })
 }
 
