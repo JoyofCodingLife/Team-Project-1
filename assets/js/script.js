@@ -89,10 +89,9 @@ function heroLocator(event) {
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`
         };
 
-
         if (data.total !== 0) {
-
             showHeroCards(data);
+            // getHeroComicData(data);
         } else {
             return console.error("No heroes found!")};
     }).catch(function(err) {
@@ -136,13 +135,38 @@ function heroLocator(event) {
         });
     }
     searchVideos ();
-    
-    
-
 }
 
 // Function to get comic data
 function getHeroComicData() {
+
+    let heroData = results.id;
+    const comicBookAPIUrl = `https://gateway.marvel.com/v1/public//characters/${apiPath}?apikey=${marvelPublicAPIKey}`;
+
+    // GET /v1/public/characters/{characterId}/comics
+    
+
+    // COMIC BOOK DATA
+    let comicTitle = "";
+    let comicThumbnail = "";
+    let comicCreator = "";
+    let comicDescription = "";
+
+    const comicCard = `
+    <div id="comicCard"> 
+    <div id="comicCardTitle">
+    <h3>Hero File Found: ${comicTitle}</h3>
+    </div>
+    <div class="heroImg">
+    <img src=${comicThumbnail} alt="This is an image of ${comicTitle}" />
+    </div>
+    <div class="heroDetails">
+    <h4>${comicTitle}</h4>
+    <h6>This comic was created by: ${comicCreator}.</h6>
+    <p>${comicDescription}</p>
+    </div>
+    </div>
+    `;
 
 };
 
