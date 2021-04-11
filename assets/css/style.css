@@ -535,19 +535,19 @@ p span {
 }
 
 #agent_aaron_front {
-	background-image: url(../images/agents/AgentAaron.jpg);
+	background-image: url(../images/Agents/AgentAaron.jpg);
 }
 
 #agent_aaron_back {
-	background-image: url(../images/agents/alterEgoAaron.jpg);
+	background-image: url(../images/Agents/alterEgoAaron.jpg);
 }
 
 #agent_lara_front {
-	background-image: url(../images/agents/AgentLara.jpg);
+	background-image: url(../images/Agents/AgentLara.jpg);
 }
 
 #agent_lara_back {
-	background-image: url(../images/agents/alterEgoLara.jpg);
+	background-image: url(../images/Agents/alterEgoLara.jpg);
 }
 /* fixed issue due to renaming folders */
 
