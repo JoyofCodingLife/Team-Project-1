@@ -480,6 +480,31 @@ input {
   	transform: rotateY(180deg);
 }
 
+/* Favourite Hero Section*/
+
+#favourite-title {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+#favourite-hero {
+	display: flex;
+	padding: 2rem;
+	flex-wrap: wrap;
+
+}
+
+#favourite-hero button {
+	padding: 1.5rem;
+	background-color: var(--marvel-red);
+	color: var(--white);
+	font-size: 1.2rem;
+	border: 1pc solid var(--marvel-red);
+	border-radius: 0.3rem;
+	margin: 1.5rem;
+}
+
+
 /* RESPONSIVE LAYOUT */ 
 @media screen and (max-width: 720px) {
     .accordion { 

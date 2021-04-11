@@ -9,7 +9,7 @@
   <!-- STYLE FILES -->
   <!-- JavaScript for Icons from FontAwesome -->
   <script src="https://kit.fontawesome.com/1228d6a68f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet"href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
   <!-- Reset Style -->
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <!-- Personal Style -->
@@ -46,7 +46,9 @@
       <button id="engageBtn">ENGAGE HERO LOCATOR PROTOCOL</button>
     </div>
     <div id="heroSearchForm" class="hide">
-      <input class="search" type="search" placeholder="Enter Hero Name.">
+      <label>
+        <input class="search" type="search" placeholder="Enter Hero Name."/>
+      </label>
       <button class="searchBtn"><i class="fas fa-search"></i></button>
 
     </div>
@@ -210,7 +212,9 @@
 
   </div>
 
+  <!-- Favourite Hero -->
    <section>
+     <h2 id="favourite-title"></h2>
      <div id="favourite-hero"></div>
    </section>
 
