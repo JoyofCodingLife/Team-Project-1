@@ -16,16 +16,21 @@ let hydraLogoEl = document.querySelector("#hydra-logo")
 let warningMessageEl = document.querySelector("#warning-message")
 let wrongHeroEl = document.querySelector("#wrong-hero");
 
-let videoResultEl = $("#videoResults");
-
+let NavBarEl = document.querySelector(".navbar");
+let homeEl = document.querySelector("#homeSection");
+let locatorEl = document.querySelector("#locatorSection");
+let cardResultEl = document.querySelector("#cardSection");
+let videoResultEl = document.querySelector("#videoSection");
+let galleryEl = document.querySelector("#gallerySection");
+let aboutUsEl = document.querySelector("#aboutUsSection");
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
 }
 
-// Favourites bar on the left/right of page has localStorage favourites - rename favourites to SHIELD related
-// localStorage to store user's favourite heroes (will shorten loading screen since data is saved locally)
+// Favorites bar on the left/right of page has localStorage favorites - rename favorites to SHIELD related
+// localStorage to store user's favorite heroes (will shorten loading screen since data is saved locally)
 
 
 // Function to clean up search function parameters
@@ -196,14 +201,7 @@ function renderHeroResults() {
 
 }
 
-// YOUTUBE API section ----------------------------------------------
-     //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=surfing&key=AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
-     //"part": ["snippet"],
-     //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
-     //"maxResults": 25,
-     //"order": "videoCount",
-     //"q": "surfing" -> what we are looking for?
- 
+
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
 searchButtonEl.addEventListener("click", heroLocator);
@@ -211,3 +209,43 @@ searchButtonEl.addEventListener("click", heroLocator);
 $(searchInputEl).autocomplete({source: HeroList});
 
 
+// Navigation 
+document.querySelector("#galleryLink").onclick = function () {
+    NavBarEl.style.display = "block";
+    homeEl.style.display = "none";
+    locatorEl.style.display = "none";
+    cardResultEl.style.display = "none";
+    videoResultEl.style.display = "none";
+    galleryEl.style.display = "block";
+    aboutUsEl.style.display = "none";
+};
+
+document.querySelector("#aboutUsLink").onclick = function () {
+    NavBarEl.style.display = "block";
+    homeEl.style.display = "none";
+    locatorEl.style.display = "none";
+    cardResultEl.style.display = "none";
+    videoResultEl.style.display = "none";
+    galleryEl.style.display = "none";
+    aboutUsEl.style.display = "block";
+};
+
+document.querySelector("#homeLink").onclick = function () {
+    NavBarEl.style.display = "block";
+    homeEl.style.display = "flex";
+    locatorEl.style.display = "block";
+    cardResultEl.style.display = "block";
+    videoResultEl.style.display = "grid";
+    galleryEl.style.display = "none";
+    aboutUsEl.style.display = "none";
+};
+
+document.querySelector("#locatorLink").onclick = function () {
+    NavBarEl.style.display = "block";
+    homeEl.style.display = "flex";
+    locatorEl.style.display = "block";
+    cardResultEl.style.display = "block";
+    videoResultEl.style.display = "grid";
+    galleryEl.style.display = "none";
+    aboutUsEl.style.display = "none";
+};
