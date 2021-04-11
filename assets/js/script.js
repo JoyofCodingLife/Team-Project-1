@@ -195,13 +195,13 @@ function showHeroCards(hero) {
     let result = hero.results[0];
     let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
     let officialUrls = result.urls;
-    let officialDetail = officialUrls[0];
+    let officialComicLink = officialUrls[2];
     let officialWiki = officialUrls[1];
     let heroImage = thumbnailUrl;
     let heroName = result.name;
     let heroID = result.id;
     let heroBio = result.description;
-    let heroDetail = officialDetail.url;
+    let heroComicLink = officialComicLink.url;
     let heroWiki = officialWiki.url;
 
     // construct hero card layout
@@ -219,7 +219,7 @@ function showHeroCards(hero) {
                         <h1>${heroName}</h1>
                         <h1>ID#${heroID}</h1>
                         <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a>.</p>
-                        <p><a href="${heroDetail}" target="_blank">Official Comic Appearances</a>.</p>
+                        <p><a href="${heroComicLink}" target="_blank">Official Comic Appearances</a>.</p>
                     </div>
                 </div>
             </div>
