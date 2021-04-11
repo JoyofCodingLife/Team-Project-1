@@ -1,6 +1,8 @@
 // List of API keys
 // // Marvel API key - 2abb8d4dbef38b7b61728089ea5eb10e
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
+const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
+const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
@@ -10,6 +12,14 @@ let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
+
+
+let errorMessageEl = document.querySelector("#error-message")
+let hydraLogoEl = document.querySelector("#hydra-logo")
+let warningMessageEl = document.querySelector("#warning-message")
+let wrongHeroEl = document.querySelector("#wrong-hero");
+
+let videoResultEl = $("#videoResults");
 
 
 // Function to call when the document loads (opacity)
@@ -54,14 +64,30 @@ function heroLocator(event) {
     if (!heroName) {
         // console.error is a placeholder for now. Have something more dynamic that alerts user to enter again.
         console.error("Hero not found. Probably undercover at HYDRA, please try again later.");
+
+        console.error("Hero not found. Probably undercover at HYDRA, please try again.");
+
         return;
     }
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
 
+
         // Main variables from Marvel API - v1/public/characters
         let data = jsonData.data;
+
+       if (data.total === 0) {
+           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again.";
+           hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
+           warningMessageEl.innerHTML = "Warning:";
+           console.error("No heroes found!");
+       } else {
+           // Always use the first result
+           wrongHeroEl.style.display = "none";
+           let result = data.results[0];
+           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+
 
         if (data.total !== 0) {
 
@@ -71,7 +97,46 @@ function heroLocator(event) {
     }).catch(function(err) {
         console.log(err);
         console.log("Failed to get hero data!");
-    })
+    });
+
+    function searchVideos() {
+
+        // YOUTUBE API section ----------------------------------------------
+        //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
+        //"part": ["snippet"],
+        //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
+        //"maxResults": 25,
+        //"order": "videoCount",
+        //"q": "surfing" -> what we are looking for?
+
+        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+        $.ajax ({
+            url: youtube2APIURL,
+            method: "GET",
+        }). then (function(youtubeResponse) {
+            $(videoResultEl).empty();
+            for (let i = 0; i < 5; i++ ) {
+                let videoInfo = {
+                    title: youtubeResponse.items[i].snippet.title,
+                    description: youtubeResponse.items[i].snippet.description,
+                    video: youtubeResponse.items[i].id.videoId,
+                };
+                let videoCard = $(`
+                <div class="video-item">
+                    <div class="video-wrap">
+                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
+                     <h3>${videoInfo.title}</h3>
+                     <p>${videoInfo.description}</p>
+                    </div>
+                </div>
+                `);
+                $(videoResultEl).append(videoCard);
+            }
+        });
+    }
+    searchVideos ();
+    
+    
 
 }
 
@@ -183,6 +248,15 @@ function renderHeroResults() {
 
 }
 
+// YOUTUBE API section ----------------------------------------------
+     //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=surfing&key=AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
+     //"part": ["snippet"],
+     //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
+     //"maxResults": 25,
+     //"order": "videoCount",
+     //"q": "surfing" -> what we are looking for?
+ 
+// EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
 searchButtonEl.addEventListener("click", function(event){
     clearHeroCards();
