@@ -174,7 +174,7 @@ input {
 #warning-message {
 	padding: 4rem;
 	color: var(--marvel-red);
-
+}
 
 .ui-menu-item:hover {
 	background-color: var(--marvel-red);

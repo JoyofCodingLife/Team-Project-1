@@ -88,34 +88,17 @@ function heroLocator(event) {
            wrongHeroEl.style.display = "none";
            let result = data.results[0];
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
-        };
 
-        if (data.total !== 0) {
-
-            let heroID = data.results[0].id;
-            console.log(heroID);
-            const comicBookAPIUrl = `https://gateway.marvel.com/v1/public/characters/${heroID}/comics?apikey=${marvelPublicAPIKey}`;
             showHeroCards(data);
 
-            fetch(comicBookAPIUrl)            
-            .then(function (response) {
-                if (response.error) {
-                    throw new Error("Unable to obtain comic book data"); 
-                } 
-                
-                return response.json();
-        
-            }).then(function (data) {
+            let heroID = data.results[0].id;
 
-                displayComicData(data);
-                
-            }).catch(error => {
-                console.log("error: ", error)
+            let comicBookUrl = buildApiUrl(`characters/${heroID}/comics`);
+
+            return fetchJsonData(comicBookUrl).then(function(jsonData) {
+                displayComicData(jsonData.data);
             });
-            // Un-comment this once get hero comic data is working:
-            // getHeroComicData(data);
-        } else {
-            return console.error("No heroes found!")};
+        }
     }).catch(function(err) {
         console.log(err);
         console.log("Failed to get hero data!");
@@ -186,7 +169,7 @@ function displayComicData(data) {
     console.log(result);
     let comicTitle = result.title;
     let comicThumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
-    let comicCreator = result.creator.item.name;
+    let comicCreator = result.creators.items[0].name;
     let comicDescription = result.description;
     
     const comicCard = `
