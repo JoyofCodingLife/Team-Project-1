@@ -216,9 +216,8 @@ function showHeroCards(hero) {
                 </div>
                 <div class="heroCardDesc">
                     <div class="heroDetails">
-                        <h4>NAME: ${heroName}</h4>
-                        <h4>ID: ${heroID}</h4>
-                        <h6>${heroBio}</h6>
+                        <h1>${heroName}</h1>
+                        <h1>ID#${heroID}</h1>
                         <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a>.</p>
                         <p><a href="${heroDetail}" target="_blank">Official Comic Appearances</a>.</p>
                     </div>

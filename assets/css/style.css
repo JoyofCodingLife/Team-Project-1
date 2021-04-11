@@ -199,9 +199,9 @@ input {
 /* HERO MAIN CARD SECTION */
 
 /* #heroCard {
-	/* display: flex;	
-	flex-wrap: wrap; */
-	/* margin: 20px 20px 0 0;  
+	display: flex;	
+	flex-wrap: wrap;
+	margin: 20px 20px 0 0;  
     border: 5px solid var(--marvel-red);
 	border-radius: 2rem;
     overflow: auto;
@@ -210,7 +210,7 @@ input {
 	padding: 0.5rem;
 	background-color: var(--lightgrey);
 	color: var(--white); 
-} */
+}  */
 
 .id-card-wrapper {
 	/* height: 100vh; */
@@ -220,18 +220,13 @@ input {
 }
 
 .id-card {
-	border: 2px solid #0AE0DF;
-	max-width: 30em;
-	margin: auto;
-	color: #fff;
-	padding: 1em;
-
 	flex-basis: 100%;
 	border: 2px solid #0AE0DF;
-	max-width: 30em;
+	max-width: 40em;
 	margin: auto;
 	color: #fff;
 	padding: 1em;
+	box-shadow: 0px 0px 3px 1px #12a0a0, inset 0px 0px 3px 1px #12a0a0;
 }
 
 .profile-row {
@@ -239,33 +234,34 @@ input {
 }
 
 .heroCardDP {
-	flex-basis: 33.3%;
+	flex-basis: 50%;
 	position: relative;
 	height: fit-content;
+	align-self: center;
 }
 
 .heroImage {
 	max-width: 100%;
 	border-radius: 50%;
 	display: block;
-	/* margin: 0;
-	padding: 0.5rem; */
+	box-shadow: 0px 0px 4px 3px #12a0a0;
+
 }
 
 .dp-arc-outer {
 	position: absolute;
-	width: calc(100% + 12px);
-	height: calc(100% + 12px);
+	width: calc(103% + 12px);
+	height: calc(103% + 12px);
 	border: 6px solid transparent;
 	border-bottom-color: #0AE0DF;
 	border-radius: 50%;
-	top: -6px;
-	left: -6px;
+	top: -12px;
+	left: -12px;
   
-	/* animation-duration: 2s;
+	animation-duration: 2s;
 	animation-name: rotate-anticlock;
 	animation-iteration-count: infinite;
-	animation-timing-function: linear; */
+	animation-timing-function: linear;
 }
 
 @keyframes rotate-anticlock {
@@ -279,18 +275,18 @@ input {
 
 .dp-arc-inner {
 	position: absolute;
-	width: 100%;
-	height: 100%;
+	width: 103%;
+	height: 103%;
 	border: 6px solid transparent;
 	border-top-color: #0AE0DF;
 	border-radius: 50%;
-	top: -16px;
-	left: -2px;
+	top: -6px;
+	left: -6px;
 
-	/* animation-duration: 2s;
+	animation-duration: 2s;
 	animation-name: rotate-clock;
 	animation-iteration-count: infinite;
-	animation-timing-function: linear; */
+	animation-timing-function: linear;
 }
 
 @keyframes rotate-clock {
@@ -328,23 +324,32 @@ input {
 } */
 
 
-.heroCardRight {
-	flex-grow: 66.6%;
-	/* float: left;
-	width: 50%; */
+.heroCardDesc {
+	flex-grow: 50%;
+	padding: 1em;
+	font-family: 'Orbitron', sans-serif;
 }
 
 .heroDetails {
 	padding: 1em;
 	margin: 0.5rem;
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 0px 0px 4px #12a0a0;
+	letter-spacing: 1px;
 }
 
-.heroDetails h4 {
+.heroDetails h1 {
+	font-family: 'Orbitron', sans-serif;
+	text-shadow: 0px 0px 4px #12a0a0;
+	letter-spacing: 1px;
+	margin: 0px;
 	font-size: 34px;
 }
 
 .heroDetails p {
+	padding-top: 0.5rem;
 	line-height: 1.6;
+	text-align: center;
 }
 
 #heroCard a {
