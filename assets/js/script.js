@@ -10,6 +10,9 @@ let searchInputEl = document.querySelector(".search");
 let engageSearchEl = document.querySelector("#engageSearchProtocol");
 let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
+// let heroCardContainer = document.querySelector("#heroLocatorResults");    
+let heroCardContainer = document.querySelector("#heroCardContainer");
+
 
 let errorMessageEl = document.querySelector("#error-message")
 let hydraLogoEl = document.querySelector("#hydra-logo")
@@ -22,11 +25,10 @@ let videoResultEl = $("#videoResults");
 // Function to call when the document loads (opacity)
 window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
-}
+};
 
 // Favourites bar on the left/right of page has localStorage favourites - rename favourites to SHIELD related
 // localStorage to store user's favourite heroes (will shorten loading screen since data is saved locally)
-
 
 // Function to clean up search function parameters
 function cleanSearchParams() {
@@ -53,7 +55,6 @@ engageSearchBtn.addEventListener("click", engageSearch);
 // Search function
 function heroLocator(event) {
 
-    // Prevents page from auto-refreshing
     event.preventDefault();
 
     // Variables needed for search function
@@ -62,6 +63,8 @@ function heroLocator(event) {
     // If no hero name, return error
     if (!heroName) {
         // console.error is a placeholder for now. Have something more dynamic that alerts user to enter again.
+        console.error("Hero not found. Probably undercover at HYDRA, please try again later.");
+
         console.error("Hero not found. Probably undercover at HYDRA, please try again.");
 
         return;
@@ -69,7 +72,10 @@ function heroLocator(event) {
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
-       let data = jsonData.data;
+
+
+        // Main variables from Marvel API - v1/public/characters
+        let data = jsonData.data;
 
        if (data.total === 0) {
            errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again.";
@@ -82,12 +88,14 @@ function heroLocator(event) {
            let result = data.results[0];
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
 
-           console.log(result.name);
-           console.log(result.description);
-           console.log(thumbnailUrl);
 
-       }
+        if (data.total !== 0) {
+
+            showHeroCards(data);
+        } else {
+            return console.error("No heroes found!")};
     }).catch(function(err) {
+        console.log(err);
         console.log("Failed to get hero data!");
     });
 
@@ -132,19 +140,63 @@ function heroLocator(event) {
 
 }
 
+// Function to get comic data
+function getHeroComicData() {
+
+};
+
+// Separate function to show hero cards
+function showHeroCards(hero) {
+
+    let result = hero.results[0];
+    let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+    let officialUrls = result.urls;
+    let officialDetail = officialUrls[0];
+    let officialWiki = officialUrls[1];
+    let heroImage = thumbnailUrl;
+    let heroName = result.name;
+    let heroBio = result.description;
+    let heroDetail = officialDetail.url;
+    let heroWiki = officialWiki.url;
+
+    // construct hero card layout
+
+    const heroCard = `
+        <div id="heroCard"> 
+        <div id="heroCardTitle">
+        <h3>Hero File Found: ${heroName}</h3>
+        </div>
+        <div class="heroImg">
+        <img src=${heroImage} alt="This is an image of ${heroName}" />
+        </div>
+        <div class="heroDetails">
+        <h4>${heroName}</h4>
+        <h6>${heroBio}</h6>
+        <p>View official hero detail <a href="${heroDetail}">here</a>.</p>
+        <p>View official hero wiki <a href="${heroWiki}">here</a>.</p>
+        </div>
+        </div>
+        `;
+
+    // append herocard to container
+    heroCardContainer.innerHTML += heroCard;
+
+};
+
+// Function to clear contents of hero card
+function clearHeroCards() {
+    heroCardContainer.innerHTML = "";
+};
+
 // Search input
 
 // Autocomplete widget for search bar
 function fetchJsonData(url) {
     return fetch(url).then(function(response) {
         if (response.ok) {
-            return response.json();
-        } else {
-            return Promise.reject(response);
-        }
+            return response.json()};
+        return Promise.reject(response);
     });
-
-
 }
 
 function buildApiUrl(apiPath) {
@@ -206,7 +258,10 @@ function renderHeroResults() {
  
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
-searchButtonEl.addEventListener("click", heroLocator);
+searchButtonEl.addEventListener("click", function(event){
+    clearHeroCards();
+    heroLocator(event);
+});
 
 $(searchInputEl).autocomplete({source: HeroList});
 
