@@ -527,28 +527,29 @@ p span {
 
 /* Our team photos */
 #agent_kate_front {
-	background-image: url(../images/agents/agentKate.jpg);
+	background-image: url(../images/Agents/AgentKate.jpg);
 }
 
 #agent_kate_back {
-	background-image: url(../images/agents/alterKate.jpg);
+	background-image: url(../images/Agents/alterEgoKate.jpg);
 }
 
 #agent_aaron_front {
-	background-image: url(../images/agents/agentAaron.jpg);
+	background-image: url(../images/agents/AgentAaron.jpg);
 }
 
 #agent_aaron_back {
-	background-image: url(../images/agents/alterAaron.jpg);
+	background-image: url(../images/agents/alterEgoAaron.jpg);
 }
 
 #agent_lara_front {
-	background-image: url(../images/agents/agentLara.jpg);
+	background-image: url(../images/agents/AgentLara.jpg);
 }
 
 #agent_lara_back {
-	background-image: url(../images/agents/alterLara.jpg);
+	background-image: url(../images/agents/alterEgoLara.jpg);
 }
+/* fixed issue due to renaming folders */
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
