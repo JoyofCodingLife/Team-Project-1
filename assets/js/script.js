@@ -253,10 +253,7 @@ document.querySelector("#locatorLink").onclick = function () {
     videoResultEl.style.display = "grid";
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
-    footerEl.style.display = "block";
-    $('html,body').animate({
-        scrollTop: $("#locatorSection").offset().top},
-    'slow');
+    footerEl.style.display = "none";
 };
 
 
