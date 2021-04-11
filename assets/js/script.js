@@ -12,7 +12,7 @@ let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
-let comicCardContainer = document.querySelector("#comicCardContainer");
+let comicCardContainer = document.querySelector("#comicsCardContainer");
 
 
 let errorMessageEl = document.querySelector("#error-message")
@@ -88,15 +88,12 @@ function heroLocator(event) {
            wrongHeroEl.style.display = "none";
            let result = data.results[0];
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+           let heroID = data.results[0].id;
+           showHeroCards(data);
 
-            showHeroCards(data);
-
-            let heroID = data.results[0].id;
-
-            let comicBookUrl = buildApiUrl(`characters/${heroID}/comics`);
-
-            return fetchJsonData(comicBookUrl).then(function(jsonData) {
-                displayComicData(jsonData.data);
+           let comicBookUrl = buildApiUrl(`characters/${heroID}/comics`);
+           return fetchJsonData(comicBookUrl).then(function(jsonData) {
+               displayComicData(jsonData.data);
             });
         }
     }).catch(function(err) {
@@ -173,11 +170,11 @@ function displayComicData(data) {
     let comicDescription = result.description;
     
     const comicCard = `
-    <div id="comicCard"> 
-    <div id="comicCardTitle">
+    <div id="comicsCard"> 
+    <div id="comicsCardTitle">
     <h3>Hero File Found: ${comicTitle}</h3>
     </div>
-    <div class="heroImg">
+    <div class="comicImg">
     <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
     </div>
     <div class="comicDetails">
@@ -202,6 +199,7 @@ function showHeroCards(hero) {
     let officialWiki = officialUrls[1];
     let heroImage = thumbnailUrl;
     let heroName = result.name;
+    let heroID = result.id;
     let heroBio = result.description;
     let heroDetail = officialDetail.url;
     let heroWiki = officialWiki.url;
@@ -209,19 +207,23 @@ function showHeroCards(hero) {
     // construct hero card layout
 
     const heroCard = `
-        <div id="heroCard"> 
-        <div id="heroCardTitle">
-        <h3>Hero File Found: ${heroName}</h3>
-        </div>
-        <div class="heroImg">
-        <img src=${heroImage} alt="This is an image of ${heroName}" />
-        </div>
-        <div class="heroDetails">
-        <h4>${heroName}</h4>
-        <h6>${heroBio}</h6>
-        <p>View official hero detail <a href="${heroDetail}">here</a>.</p>
-        <p>View official hero wiki <a href="${heroWiki}">here</a>.</p>
-        </div>
+        <div id="heroCard" class="id-card"> 
+            <div class="profile-row">
+                <div class="heroCardDP">
+                    <div class="dp-arc-outer"></div>
+                    <div class="dp-arc-inner"></div>
+                    <img class="heroImage" src=${heroImage} alt="This is an image of ${heroName}" />
+                </div>
+                <div class="heroCardDesc">
+                    <div class="heroDetails">
+                        <h4>NAME: ${heroName}</h4>
+                        <h4>ID: ${heroID}</h4>
+                        <h6>${heroBio}</h6>
+                        <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a>.</p>
+                        <p><a href="${heroDetail}" target="_blank">Official Comic Appearances</a>.</p>
+                    </div>
+                </div>
+            </div>
         </div>
         `;
 

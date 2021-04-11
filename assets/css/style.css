@@ -11,6 +11,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	--gentlered: rgb(214, 148, 148);
     --black: #000000;
 	--shield-blue: rgb(28, 28, 99);
+	--baby-blue: lightblue;
 	--lightgrey: rgb(192, 188, 188);
 }
 
@@ -195,38 +196,185 @@ input {
     margin-left: 4px;
 }
 
+/* HERO MAIN CARD SECTION */
 
-
-/* Hero Section
-
-#hero-image {
-    height: 50%;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-}
-*/
-
-/* Uncomment hide class when ready to test */
-/* .hide {
-	display: none;
-	visibility: none;
+/* #heroCard {
+	/* display: flex;	
+	flex-wrap: wrap; */
+	/* margin: 20px 20px 0 0;  
+    border: 5px solid var(--marvel-red);
+	border-radius: 2rem;
+    overflow: auto;
+	width: 100%;
+	height: 370px;
+	padding: 0.5rem;
+	background-color: var(--lightgrey);
+	color: var(--white); 
 } */
 
-/* Hero Card */
-#heroCard {
+.id-card-wrapper {
+	/* height: 100vh; */
 	display: flex;
-	list-style-type: none;
-	background-color: var(--lightgrey);
-	color: var(--white);
+	background-color: #122023;
 	width: 100%;
-	flex-wrap: wrap;
-	justify-content: center;
 }
+
+.id-card {
+	border: 2px solid #0AE0DF;
+	max-width: 30em;
+	margin: auto;
+	color: #fff;
+	padding: 1em;
+
+	flex-basis: 100%;
+	border: 2px solid #0AE0DF;
+	max-width: 30em;
+	margin: auto;
+	color: #fff;
+	padding: 1em;
+}
+
+.profile-row {
+	display: flex;
+}
+
+.heroCardDP {
+	flex-basis: 33.3%;
+	position: relative;
+	height: fit-content;
+}
+
+.heroImage {
+	max-width: 100%;
+	border-radius: 50%;
+	display: block;
+	/* margin: 0;
+	padding: 0.5rem; */
+}
+
+.dp-arc-outer {
+	position: absolute;
+	width: calc(100% + 12px);
+	height: calc(100% + 12px);
+	border: 6px solid transparent;
+	border-bottom-color: #0AE0DF;
+	border-radius: 50%;
+	top: -6px;
+	left: -6px;
+  
+	/* animation-duration: 2s;
+	animation-name: rotate-anticlock;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear; */
+}
+
+@keyframes rotate-anticlock {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(-360deg);
+	}
+}
+
+.dp-arc-inner {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: 6px solid transparent;
+	border-top-color: #0AE0DF;
+	border-radius: 50%;
+	top: -16px;
+	left: -2px;
+
+	/* animation-duration: 2s;
+	animation-name: rotate-clock;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear; */
+}
+
+@keyframes rotate-clock {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(360deg);
+	}
+}
+
+/* .heroMiddle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%)
+} */
+
+/* .heroCardLeft:hover .heroImage {
+	opacity: 0.3;
+}
+  
+.heroCardLeft:hover .heroMiddle {
+	opacity: 1;
+} */
+  
+/* .heroText {
+	background-color: var(--shield-blue);
+	color: var(--white);
+	font-size: 16px;
+	padding: 16px 32px;
+} */
+
+
+.heroCardRight {
+	flex-grow: 66.6%;
+	/* float: left;
+	width: 50%; */
+}
+
+.heroDetails {
+	padding: 1em;
+	margin: 0.5rem;
+}
+
+.heroDetails h4 {
+	font-size: 34px;
+}
+
+.heroDetails p {
+	line-height: 1.6;
+}
+
+#heroCard a {
+	text-decoration: none;
+	color: var(--gentlered);
+	cursor: pointer;
+}
+
+#heroCard a:hover {
+	font-size: larger;
+	color: var(--white);
+}
+
+/* HERO COMICS CARD SECTION */
+
+/* #comicsCard {
+
+}
+
+#comicsCardTitle {
+
+}
+
+#comicImg {
+
+}
+
+#comicDetails {
+
+} */
 
 /* RESULT VIDEOS SECTION */
 .video-item {
@@ -297,34 +445,6 @@ input {
 	}
   }
 
-#heroCardTitle {
-	/* display: inline-block; */
-	margin: 0 auto;
-	padding: 3px;
-	border: 1px black;
-	font-size: 30px;
-}
-
-/* .heroImg {
-	position: relative;
-} */
-
-#heroCard a {
-	text-decoration: none;
-	color: var(--gentlered);
-	cursor: pointer;
-}
-
-#heroCard a:hover {
-	font-size: larger;
-	color: var(--white);
-}
-
-.heroDetails {
-	font-size: 24px;
-	padding: 0.5rem;
-	/* line-height: 200%; */
-}
 
 /* GALLERY SECTION */
 
