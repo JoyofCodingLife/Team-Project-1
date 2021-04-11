@@ -42,7 +42,7 @@ body{
    text-align: end;
 }
 
-a{
+a {
    color: var(--white);
    font-size: 15px;
    margin-right: 15px;
@@ -495,10 +495,20 @@ p span {
     transform: rotateY(180deg);
 }
 
+/* FOOTER SECTION */
+#imginthefooter {       
+	display: flex;
+    /* Settings for v1 - full picture background */
+    background: url("../images/background-1.jpg") no-repeat center; 
+    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}​​​​​​​​​
+
 /* RESPONSIVE LAYOUT */ 
 @media screen and (max-width: 720px) {
     .accordion { 
-		width: 540px; 
+		width: 540px;
 	}
 	
 	.accordion figure { 
@@ -518,6 +528,7 @@ p span {
 		font-size: 16px; 
 	}
 }
+
 
 @media screen and (max-width: 520px) {
     .accordion { 
