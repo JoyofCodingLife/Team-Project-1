@@ -86,7 +86,8 @@ function heroLocator(event) {
            // Always use the first result
            wrongHeroEl.style.display = "none";
            let result = data.results[0];
-           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`
+        };
 
 
         if (data.total !== 0) {
