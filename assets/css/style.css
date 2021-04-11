@@ -491,17 +491,28 @@ input {
 	display: flex;
 	padding: 2rem;
 	flex-wrap: wrap;
+	justify-content: center;
 
 }
 
 #favourite-hero button {
-	padding: 1.5rem;
 	background-color: var(--marvel-red);
 	color: var(--white);
 	font-size: 1.2rem;
 	border: 1pc solid var(--marvel-red);
 	border-radius: 0.3rem;
-	margin: 1.5rem;
+	margin: 0.5rem;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.column {
+	float: left;
+	width: 25%;
 }
 
 

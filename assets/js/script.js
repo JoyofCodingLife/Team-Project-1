@@ -206,10 +206,11 @@ function buildHeroList() {
 function displayFavouriteHeroList() {
 
     let favouriteHeroContainer = $("#favourite-hero");
-    $("#favourite-title").html("Locate Favourite Hero");
+    $("#favourite-title").html("Your Most Wanted Heroes");
     favouriteHeroContainer.find("button").remove();
     favouriteHeroList.forEach(function (heroName) {
-        let favouriteHeroButton = $("<button></button>")
+        let favouriteHeroButton = $("<button></button>");
+        favouriteHeroButton.addClass("column");
         favouriteHeroButton.append(heroName);
         favouriteHeroButton.appendTo(favouriteHeroContainer);
         favouriteHeroButton.click(function () {
