@@ -107,12 +107,18 @@ function heroLocator(event) {
             method: "GET",
         }). then (function(youtubeResponse) {
             $(videoResultEl).empty();
-            for (let i = 0; i < 5; i++ ) {
+            let validCount = 0;
+            for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
                 let videoInfo = {
                     title: youtubeResponse.items[i].snippet.title,
                     description: youtubeResponse.items[i].snippet.description,
                     video: youtubeResponse.items[i].id.videoId,
                 };
+                // Not all responses have a videoId for some reason.
+                if (videoInfo.video === undefined) {
+                    continue;
+                }
+                validCount++;
                 let videoCard = $(`
                 <div class="video-item">
                     <div class="video-wrap">
