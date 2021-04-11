@@ -26,6 +26,7 @@ let cardResultEl = document.querySelector("#cardSection");
 let videoResultEl = document.querySelector("#videoSection");
 let galleryEl = document.querySelector("#gallerySection");
 let aboutUsEl = document.querySelector("#aboutUsSection");
+let footerEl = document.querySelector("#footer")
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -280,6 +281,8 @@ document.querySelector("#galleryLink").onclick = function () {
     videoResultEl.style.display = "none";
     galleryEl.style.display = "block";
     aboutUsEl.style.display = "none";
+    footerEl.style.display = "none";
+
 };
 
 document.querySelector("#aboutUsLink").onclick = function () {
@@ -290,6 +293,7 @@ document.querySelector("#aboutUsLink").onclick = function () {
     videoResultEl.style.display = "none";
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "block";
+    footerEl.style.display = "none";
 };
 
 document.querySelector("#homeLink").onclick = function () {
@@ -300,6 +304,7 @@ document.querySelector("#homeLink").onclick = function () {
     videoResultEl.style.display = "grid";
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
+    footerEl.style.display = "block";
 };
 
 document.querySelector("#locatorLink").onclick = function () {
@@ -310,4 +315,8 @@ document.querySelector("#locatorLink").onclick = function () {
     videoResultEl.style.display = "grid";
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
+    footerEl.style.display = "none";
 };
+
+
+
