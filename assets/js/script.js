@@ -32,16 +32,16 @@ window.onload = function () {
 // localStorage to store user's favourite heroes (will shorten loading screen since data is saved locally)
 
 // Function to clean up search function parameters
-function cleanSearchParams() {
+// function cleanSearchParams() {
 
-    // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
-    let heroSearchParamsArr = document.location.search.split('&');
+//     // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
+//     let heroSearchParamsArr = document.location.search.split('&');
 
-    // Get the query and format values
-    let query = herosearchParamsArr[0].split('=').pop();
+//     // Get the query and format values
+//     let query = herosearchParamsArr[0].split('=').pop();
 
-    getMarvelAPI(query);
-};
+//     getMarvelAPI(query);
+// };
 
 // Engage function (to display search bar)
 function engageSearch() {
@@ -87,13 +87,33 @@ function heroLocator(event) {
            // Always use the first result
            wrongHeroEl.style.display = "none";
            let result = data.results[0];
-           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`
+           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
         };
 
         if (data.total !== 0) {
+
+            let heroID = data.results[0].id;
+            console.log(heroID);
+            const comicBookAPIUrl = `https://gateway.marvel.com/v1/public/characters/${heroID}/comics?apikey=${marvelPublicAPIKey}`;
             showHeroCards(data);
+
+            fetch(comicBookAPIUrl)            
+            .then(function (response) {
+                if (response.error) {
+                    throw new Error("Unable to obtain comic book data"); 
+                } 
+                
+                return response.json();
+        
+            }).then(function (data) {
+
+                displayComicData(data);
+                
+            }).catch(error => {
+                console.log("error: ", error)
+            });
             // Un-comment this once get hero comic data is working:
-            //// getHeroComicData(data);
+            // getHeroComicData(data);
         } else {
             return console.error("No heroes found!")};
     }).catch(function(err) {
@@ -140,33 +160,34 @@ function heroLocator(event) {
 }
 
 // Function to get comic data
-function getHeroComicData() {
+// function getHeroComicData(data) {
 
-    let heroData = results.id;
-    const comicBookAPIUrl = `https://gateway.marvel.com/v1/public//characters/${heroData}/comics?apikey=${marvelPublicAPIKey}`;
+//     // Example API Url:
+//     // https://gateway.marvel.com:443/v1/public/characters/1009368/comics?apikey=31b9bc16e5d84eea2502c7adf4fceced
 
-    // GET /v1/public/characters/{characterId}/comics
-    fetch(comicBookAPIUrl)            
-    .then(function (response) {
-        if (response.error) {
-            throw new Error("Unable to obtain comic book data"); 
-        } 
-        return response.json();
+//     // GET /v1/public/characters/{characterId}/comics
+//     fetch(comicBookAPIUrl)            
+//     .then(function (response) {
+//         if (response.error) {
+//             throw new Error("Unable to obtain comic book data"); 
+//         } 
+//         return response.json();
         
-    }).then(function (data) {
-        displayComicData(data);
-    }).catch(error => {
-        console.log("error: ", error)
-    });
-};
+//     }).then(function (data) {
+//         displayComicData(data);
+//     }).catch(error => {
+//         console.log("error: ", error)
+//     });
+// };
 
-function displayComicData() {
-    // 
-    let comicTitle = data.results.title;
-    let comicThumbnail = data.results.thumbail;
-    let comicThumbnailUrl = `${comicThumbnail.path}.${comicThumbnail.extension}`
-    let comicCreator = data.results.creator.item.name;
-    let comicDescription = data.results.description;
+function displayComicData(data) {
+
+    let result = data.results[0];
+    console.log(result);
+    let comicTitle = result.title;
+    let comicThumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+    let comicCreator = result.creator.item.name;
+    let comicDescription = result.description;
     
     const comicCard = `
     <div id="comicCard"> 
@@ -184,9 +205,9 @@ function displayComicData() {
     </div>
     `;
     
+    // append herocard to container
+    comicCardContainer.innerHTML += comicCard;
 };
-
-getHeroComicData();
 
 // Separate function to show hero cards
 function showHeroCards(hero) {
@@ -229,8 +250,7 @@ function showHeroCards(hero) {
 // Function to clear contents of hero card
 function clearHeroCards() {
     heroCardContainer.innerHTML = "";
-    comicCardContainer.innerHTML = "";
-
+    // comicCardContainer.innerHTML = "";
 };
 
 // Search input
