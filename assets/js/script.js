@@ -12,6 +12,7 @@ let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
+let comicCardContainer = document.querySelector("#comicCardContainer");
 
 
 let errorMessageEl = document.querySelector("#error-message")
@@ -91,7 +92,8 @@ function heroLocator(event) {
 
         if (data.total !== 0) {
             showHeroCards(data);
-            // getHeroComicData(data);
+            // Un-comment this once get hero comic data is working:
+            //// getHeroComicData(data);
         } else {
             return console.error("No heroes found!")};
     }).catch(function(err) {
@@ -134,41 +136,57 @@ function heroLocator(event) {
             }
         });
     }
-    searchVideos ();
+    searchVideos();
 }
 
 // Function to get comic data
 function getHeroComicData() {
 
     let heroData = results.id;
-    const comicBookAPIUrl = `https://gateway.marvel.com/v1/public//characters/${apiPath}?apikey=${marvelPublicAPIKey}`;
+    const comicBookAPIUrl = `https://gateway.marvel.com/v1/public//characters/${heroData}/comics?apikey=${marvelPublicAPIKey}`;
 
     // GET /v1/public/characters/{characterId}/comics
+    fetch(comicBookAPIUrl)            
+    .then(function (response) {
+        if (response.error) {
+            throw new Error("Unable to obtain comic book data"); 
+        } 
+        return response.json();
+        
+    }).then(function (data) {
+        displayComicData(data);
+    }).catch(error => {
+        console.log("error: ", error)
+    });
+};
+
+function displayComicData() {
+    // 
+    let comicTitle = data.results.title;
+    let comicThumbnail = data.results.thumbail;
+    let comicThumbnailUrl = `${comicThumbnail.path}.${comicThumbnail.extension}`
+    let comicCreator = data.results.creator.item.name;
+    let comicDescription = data.results.description;
     
-
-    // COMIC BOOK DATA
-    let comicTitle = "";
-    let comicThumbnail = "";
-    let comicCreator = "";
-    let comicDescription = "";
-
     const comicCard = `
     <div id="comicCard"> 
     <div id="comicCardTitle">
     <h3>Hero File Found: ${comicTitle}</h3>
     </div>
     <div class="heroImg">
-    <img src=${comicThumbnail} alt="This is an image of ${comicTitle}" />
+    <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
     </div>
-    <div class="heroDetails">
+    <div class="comicDetails">
     <h4>${comicTitle}</h4>
     <h6>This comic was created by: ${comicCreator}.</h6>
     <p>${comicDescription}</p>
     </div>
     </div>
     `;
-
+    
 };
+
+getHeroComicData();
 
 // Separate function to show hero cards
 function showHeroCards(hero) {
@@ -211,6 +229,8 @@ function showHeroCards(hero) {
 // Function to clear contents of hero card
 function clearHeroCards() {
     heroCardContainer.innerHTML = "";
+    comicCardContainer.innerHTML = "";
+
 };
 
 // Search input
