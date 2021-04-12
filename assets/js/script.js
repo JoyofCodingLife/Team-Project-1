@@ -33,11 +33,11 @@ let footerEl = document.querySelector("#footer");
 
 // Storage
 // localStorage to store user's favorite heroes (will shorten loading screen since data is saved locally)
-let favouriteHeroList = [];
-let STORAGE_FAV_HERO_KEY = "favourite-hero";
+let searchHistoryHeroList = [];
+let STORAGE_FAV_HERO_KEY = "search-history-hero";
 let storedFavHeros = localStorage.getItem(STORAGE_FAV_HERO_KEY);
     if (storedFavHeros !==null) {
-    favouriteHeroList = JSON.parse(storedFavHeros);
+    searchHistoryHeroList = JSON.parse(storedFavHeros);
 };
 
 // Function to call when the document loads (opacity)
@@ -72,10 +72,14 @@ engageSearchBtn.addEventListener("click", engageSearch);
 function heroLocator(heroName) {
 
     // Storage
-    favouriteHeroList.unshift(heroName);
-    favouriteHeroList.splice(6);
-    displayFavouriteHeroList();
-    localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(favouriteHeroList));
+    if (searchHistoryHeroList.indexOf(heroName) == -1) {
+        searchHistoryHeroList.unshift(heroName);
+        searchHistoryHeroList.splice(6);
+    }
+    
+    displaySearchHistoryHeroList();
+
+    localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(searchHistoryHeroList));
         
         // If no hero name, return error
         if (!heroName) {
@@ -86,6 +90,7 @@ function heroLocator(heroName) {
 
             return;
     }
+
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
@@ -295,17 +300,17 @@ function buildHeroList() {
     });
 };
 
-function displayFavouriteHeroList() {
+function displaySearchHistoryHeroList() {
 
-    let favouriteHeroContainer = $("#favourite-hero");
-    $("#favourite-title").html("Your Most Wanted Heroes");
-    favouriteHeroContainer.find("button").remove();
-    favouriteHeroList.forEach(function (heroName) {
-        let favouriteHeroButton = $("<button></button>");
-        favouriteHeroButton.addClass("column");
-        favouriteHeroButton.append(heroName);
-        favouriteHeroButton.appendTo(favouriteHeroContainer);
-        favouriteHeroButton.click(function () {
+    let searchHistoryHeroContainer = $("#search-history-hero");
+    $("#search-history-title").html("Your Most Wanted Heroes");
+    searchHistoryHeroContainer.find("button").remove();
+    searchHistoryHeroList.forEach(function (heroName) {
+        let searchHistoryHeroButton = $("<button></button>");
+        searchHistoryHeroButton.addClass("column");
+        searchHistoryHeroButton.append(heroName);
+        searchHistoryHeroButton.appendTo(searchHistoryHeroContainer);
+        searchHistoryHeroButton.click(function () {
             heroLocator(heroName);
             // searchInputEl.scrollIntoView(true);
             $('html,body').animate({
@@ -332,7 +337,7 @@ searchInputEl.addEventListener("keyup", function(event) {
 });
 
 $(searchInputEl).autocomplete({source: HeroList});
-displayFavouriteHeroList();
+displaySearchHistoryHeroList();
 
 // Navigation 
 document.querySelector("#galleryLink").onclick = function () {

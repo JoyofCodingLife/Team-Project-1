@@ -755,14 +755,14 @@ p span {
     transform: rotateY(180deg);
 }
 
-/* Favourite Hero Section*/
+/* Search History Hero Section*/
 
-#favourite-title {
+#search-history-title {
 	margin-top: 2rem;
 	text-align: center;
 }
 
-#favourite-hero {
+#search-history-hero {
 	display: flex;
 	padding: 2rem;
 	flex-wrap: wrap;
@@ -770,7 +770,7 @@ p span {
 
 }
 
-#favourite-hero button {
+#search-history-hero button {
 	background-color: var(--marvel-red);
 	color: var(--white);
 	font-size: 1.2rem;
