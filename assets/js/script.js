@@ -24,10 +24,6 @@ let warningMessageEl = document.querySelector("#warning-message")
 let wrongHeroEl = document.querySelector("#wrong-hero");
 
 
-let videoResultEl = $("#videoResults");
-
-}
-
 let NavBarEl = document.querySelector(".navbar");
 let homeEl = document.querySelector("#homeSection");
 let locatorEl = document.querySelector("#locatorSection");
@@ -368,7 +364,7 @@ document.querySelector("#locatorLink").onclick = function () {
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
     footerEl.style.display = "none";
-};
+}}
 
 
 
