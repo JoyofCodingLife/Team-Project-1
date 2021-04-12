@@ -16,13 +16,10 @@ let mostWantedEl = document.querySelector("#most-wanted");
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
 
-
-
-let errorMessageEl = document.querySelector("#error-message")
-let hydraLogoEl = document.querySelector("#hydra-logo")
-let warningMessageEl = document.querySelector("#warning-message")
+let errorMessageEl = document.querySelector("#error-message");
+let hydraLogoEl = document.querySelector("#hydra-logo");
+let warningMessageEl = document.querySelector("#warning-message");
 let wrongHeroEl = document.querySelector("#wrong-hero");
-
 
 let NavBarEl = document.querySelector(".navbar");
 let homeEl = document.querySelector("#homeSection");
@@ -31,22 +28,21 @@ let cardResultEl = document.querySelector("#cardSection");
 let videoResultEl = document.querySelector("#videoSection");
 let galleryEl = document.querySelector("#gallerySection");
 let aboutUsEl = document.querySelector("#aboutUsSection");
-let footerEl = document.querySelector("#footer")
+let footerEl = document.querySelector("#footer");
 
 // Storage
+// localStorage to store user's favorite heroes (will shorten loading screen since data is saved locally)
 let favouriteHeroList = [];
 let STORAGE_FAV_HERO_KEY = "favourite-hero";
 let storedFavHeros = localStorage.getItem(STORAGE_FAV_HERO_KEY);
-if (storedFavHeros !==null) {
+    if (storedFavHeros !==null) {
     favouriteHeroList = JSON.parse(storedFavHeros);
+};
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
 };
-
-// Favorites bar on the left/right of page has localStorage favorites - rename favorites to SHIELD related
-// localStorage to store user's favorite heroes (will shorten loading screen since data is saved locally)
 
 // Function to clean up search function parameters
 function cleanSearchParams() {
@@ -80,22 +76,17 @@ function heroLocator(heroName) {
     favouriteHeroList.splice(6);
     displayFavouriteHeroList();
     localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(favouriteHeroList));
+        event.preventDefault();
+        
+        // If no hero name, return error
+        if (!heroName) {
+            // console.error is a placeholder for now. Have something more dynamic that alerts user to enter again.
+            console.error("Hero not found. Probably undercover at HYDRA, please try again later.");
 
-    event.preventDefault();
+            console.error("Hero not found. Probably undercover at HYDRA, please try again.");
 
-
-
-    // If no hero name, return error
-    if (!heroName) {
-        // console.error is a placeholder for now. Have something more dynamic that alerts user to enter again.
-        console.error("Hero not found. Probably undercover at HYDRA, please try again later.");
-
-        console.error("Hero not found. Probably undercover at HYDRA, please try again.");
-
-        return;
+            return;
     }
-
-
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
@@ -117,9 +108,7 @@ function heroLocator(heroName) {
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`
         };
 
-
         if (data.total !== 0) {
-
             showHeroCards(data);
         } else {
             return console.error("No heroes found!")};
@@ -170,9 +159,6 @@ function heroLocator(heroName) {
         });
     }
     searchVideos ();
-    
-    
-
 }
 
 // Function to get comic data
@@ -232,11 +218,11 @@ function fetchJsonData(url) {
             return response.json()};
         return Promise.reject(response);
     });
-}
+};
 
 function buildApiUrl(apiPath) {
     return `https://gateway.marvel.com/v1/public/${apiPath}?apikey=${marvelPublicAPIKey}`;
-}
+};
 
 /**
  * Repeatedly request heroes from the API to build a list of all heroes. We don't call this as part of the actual
@@ -245,6 +231,7 @@ function buildApiUrl(apiPath) {
  *
  * See heroes.js for the list.
  */
+
 function buildHeroList() {
 
     // We can't get more than 100 results per request and the default is 20. We use the maximum to reduce number of
@@ -276,8 +263,7 @@ function buildHeroList() {
     }).catch(function(err) {
         console.log("Failed to build hero list: " + err);
     });
-}
-
+};
 
 function displayFavouriteHeroList() {
 
@@ -296,8 +282,8 @@ function displayFavouriteHeroList() {
                     scrollTop: $(".search").offset().top},
                 'slow');
         });
-    })
-}
+    });
+};
 
 
 // EVENT LISTENERS section ----------------------------------------------
@@ -308,6 +294,7 @@ searchButtonEl.addEventListener("click", function (event) {
     heroLocator(searchInputEl.value);
 
 });
+
 searchInputEl.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
@@ -364,7 +351,7 @@ document.querySelector("#locatorLink").onclick = function () {
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
     footerEl.style.display = "none";
-}}
+};
 
 
 
