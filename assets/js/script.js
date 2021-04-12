@@ -45,18 +45,6 @@ window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
 };
 
-// Function to clean up search function parameters
-// function cleanSearchParams() {
-
-//     // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
-//     let heroSearchParamsArr = document.location.search.split('&');
-
-//     // Get the query and format values
-//     let query = herosearchParamsArr[0].split('=').pop();
-
-//     getMarvelAPI(query);
-// };
-
 // Engage function (to display search bar)
 function engageSearch() {
 

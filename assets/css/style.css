@@ -372,7 +372,6 @@ To set the beginning and end state of animation, we use the keywords from and to
 /* HERO COMICS CARD SECTION */
 
 .comic-layout-wrapper {
-	/* height: 100vh; */
 	margin: 32px 0px;
 	display: flex;
 	background-color: transparent;
@@ -390,7 +389,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 }
 
 .comic-profile-layout {
-	display: flex;
+	flex-direction: column;
 }
 
 .comicDP {
@@ -438,7 +437,6 @@ To set the beginning and end state of animation, we use the keywords from and to
 }
 
 #comicsCard a:hover {
-	font-size: larger;
 	color: #12a0a0;
 }
 
