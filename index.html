@@ -19,18 +19,18 @@
 </head>
 
 <body>
-   <!-- NAVIGATION BAR -->    
+   <!-- NAVIGATION SECTION -->    
    <nav class="navbar">
     <div class="max-width">
-             <a href="#home">Home</a>
-             <a href="#locator">Locator</a>
-             <a href="#gallery">Gallery</a>
-             <a href="#aboutus">About Us</a>
+             <a href="#homeSection" id="homeLink">Home</a>
+             <a href="#locatorSection" id="locatorLink">Locator</a>
+             <a href="#gallerySection" id="galleryLink">Gallery</a>
+             <a href="#aboutUsSection" id="aboutUsLink">About Us</a>
     </div>
 </nav>
 
 <!-- HOME SECTION -->
-<main class="home" id="home">
+<main class="home" id="homeSection">
    <div class="max-width">
        <div class="home-content">
            <h1 class="text-1">MARVEL</h1>
@@ -40,8 +40,9 @@
    </div>
 </main>
 
-  <!-- SEARCH BAR   -->
-  <div id="locator">
+  <!-- SEARCH SECTION -->
+  <div id="locatorSection">
+
     <div id="engageSearchProtocol" >
       <button id="engageBtn">ENGAGE HERO LOCATOR PROTOCOL</button>
     </div>
@@ -67,17 +68,27 @@
     </div>
 
   <!-- RESULT CARDS SECTION -->
-  <div class="cardSection" style="background-color: blue; height: 500px;">
+  <div id="cardSection">
 
   </div>
 
   <!-- RESULT VIDEOS SECTION -->
-  <div class="video-grid" id="videoResults" >
+  <div class="video-grid" id="videoSection" >
       <!-- display <div> with 5 cards -->
   </div>
 
+  <!--  HERO LOCATOR CONTAINER -->
+  <div id="heroLocatorResults">
+    <div id="heroLocatorTitle"></div>
+    <div id="heroCardContainer"></div>
+  </div>
+
+  <!-- HERO COMICS CONTAINER -->
+
+  
+  
   <!-- GALLERY SECTION -->
-  <div class="accordion" id="gallery">
+  <div class="accordion" id="gallerySection">
 				
     <figure>
       <img src="./assets/images/Heros/Avengers.jpg" alt="image01-Avengers"/>
@@ -95,14 +106,14 @@
           <figcaption><span>Captain America</span></figcaption>
           
           <figure>
-            <img src="./assets/images/Heros/Xmen.jpg" alt="image04-Xmen" />
+            <img src="./assets/images/Heros/Xmen.jpg" alt="image04-X Men" />
             <input type="radio" name="radio-set" />
             <figcaption><span>X Men</span></figcaption>
             
             <figure>
-              <img src="./assets/images/Heros/BlackPanter.jpg" alt="image05-Black Panter" />
+              <img src="./assets/images/Heros/BlackPanther.jpg" alt="image05-Black Panther" />
               <input type="radio" name="radio-set" />
-              <figcaption><span>Black Panter</span></figcaption>
+              <figcaption><span>Black Panther</span></figcaption>
               
               <figure>
                 <img src="./assets/images/Heros/SpiderMan.jpg" alt="image06-SpiderMan" />
@@ -136,9 +147,9 @@
                           <figcaption><span>Falcon</span></figcaption>
 
                           <figure>
-                            <img src="./assets/images/Heros/Wolverine.jpg" alt="image12-Wolvorine" />
+                            <img src="./assets/images/Heros/Wolverine.jpg" alt="image12-Wolverine" />
                             <input type="radio" name="radio-set" />
-                            <figcaption><span>Wolvorine</span></figcaption>
+                            <figcaption><span>Wolverine</span></figcaption>
 
                             <figure>
                               <img src="./assets/images/Heros/Guardians.jpg" alt="image13-Guardians of the Galaxy" />
@@ -160,17 +171,19 @@
     </figure>
   </div>
 
+  <!-- ISSUES DUE TO RENAMING FOLDERS -->
+  
   <!-- ABOUT US SECTION -->
+  <div id="aboutUsSection" >
 
-  <div id="aboutus" >
-    <h2>Agents behind the screen</h2>
+    <h2 id="agentsBehind">Agents behind the screen</h2>
 
     <div class="agentCard">
       <div class="agentInfo">
-        <h2>Kate McColl</h2> 
-        <p>Specialisation: </p> 
-        <p>Fan of </p>
-        <p>Contact by:</p>
+        <h3 class="agentName">Kate McColl</h3> 
+        <p>Specialisation: jQuery</p> 
+        <p>Fan of <span>SpiderMan</span></p>
+        <p>Contact by: <a href="https://github.com/katemccoll" target="_blank">GitHub <i class="fab fa-github"></i></a></p>
       </div>
       <div class="flip-card-inner">
         <div class="flip-card-front">
@@ -184,10 +197,10 @@
 
     <div class="agentCard">
       <div class="agentInfo">
-        <h2>Aaron Au Yoong</h2> 
-        <p>Specialisation: </p> 
-        <p>Fan of </p>
-        <p>Contact by:</p>
+        <h3 class="agentName">Aaron Au Yoong</h3> 
+        <p>Specialisation: DOM</p> 
+        <p>Fan of <span>Black Widow</span></p>
+        <p>Contact by: <a href="https://github.com/aaronauyoong" target="_blank">GitHub <i class="fab fa-github"></i></a></p>
       </div>
       <div class="flip-card-inner">
         <div class="flip-card-front">
@@ -201,25 +214,27 @@
 
     <div class="agentCard">
       <div class="agentInfo">
-        <h2>Lara Korolyova</h2> 
-        <p>Specialisation: </p> 
-        <p>Fan of Iron Man</p>
-        <p>Contact by:</p>
+        <h3 class="agentName">Lara Korolyova</h3> 
+        <p>Specialisation: CSS</p> 
+        <p>Fan of <span>Iron Man</span> </p>
+        <p>Contact by: <a href="https://github.com/KorolyovaLara" target="_blank">GitHub <i class="fab fa-github"></i></a></p>
       </div>
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="./assets/images/Agents/AgentLara.jpg" alt="Lara Korolyova photo" style="width: 50%;">
+          <div id="agent_lara_front"></div>
         </div>
         <div class="flip-card-back">
-          <img src="./assets/images/Agents/AlterLara.jpg" alt="Lara Korolyova as Loki" style="width: 50%;">
+          <div id="agent_lara_back"></div>
         </div>
       </div>
     </div>
 
   </div>
 
-
-
+  <!-- FOOTER SECTION -->
+  ​<div id="footer">
+    <div id="imginthefooter"></div>    
+  </div>
 
 
   <!-- JAVASCRIPT FILES -->
@@ -230,7 +245,6 @@
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <!-- Google API JS -->
    <script src="https://apis.google.com/js/api.js"></script>
-
    <!-- Personal JS -->
    <script src="./assets/js/heroes.js"></script>
    <script src="./assets/js/script.js"></script>
