@@ -1,7 +1,7 @@
 // List of API keys
-// // Marvel API key - 2abb8d4dbef38b7b61728089ea5eb10e
+    // Spare YouTube API key if reached limit - AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
-const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
+const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
 const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
@@ -134,11 +134,11 @@ function heroLocator(heroName) {
         //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
         //"part": ["snippet"],
         //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
-        //"maxResults": 25,
+        //"maxResults": 10,
         //"order": "videoCount",
         //"q": "surfing" -> what we are looking for?
 
-        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=25&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=10&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`; 
         $.ajax ({
             url: youtube2APIURL,
             method: "GET",
