@@ -139,53 +139,35 @@ function heroLocator(event) {
     searchVideos();
 }
 
-// Function to get comic data
-// function getHeroComicData(data) {
+function displayComicData(comics) {
 
-//     // Example API Url:
-//     // https://gateway.marvel.com:443/v1/public/characters/1009368/comics?apikey=31b9bc16e5d84eea2502c7adf4fceced
+    console.log(comics);
 
-//     // GET /v1/public/characters/{characterId}/comics
-//     fetch(comicBookAPIUrl)            
-//     .then(function (response) {
-//         if (response.error) {
-//             throw new Error("Unable to obtain comic book data"); 
-//         } 
-//         return response.json();
-        
-//     }).then(function (data) {
-//         displayComicData(data);
-//     }).catch(error => {
-//         console.log("error: ", error)
-//     });
-// };
-
-function displayComicData(data) {
-
-    let result = data.results[0];
-    console.log(result);
-    let comicTitle = result.title;
-    let comicThumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
-    let comicCreator = result.creators.items[0].name;
-    let comicInfo = result.urls[0].url;
+    comics.results.forEach((comic) => {
+        // let result = comic.results[0];
+        // console.log(result);
+        console.log(comic);
+        let comicTitle = comic.title;
+        let comicThumbnailUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
+        let comicCreator = comic.creators.items[0].name;
+        let comicInfo = comic.urls[0].url;
     
-    const comicCard = `
-    <div id="comicsCard" class="comics-card"> 
-        <div class="comic-profile-layout">
-            <div class="comicDP">
-                <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
-            </div>
-            <div class="comicDetails">
-                <h1>${comicTitle}</h1>
-                <h3>Editor: ${comicCreator}.</h3>
-                <p><a href="${comicInfo}" target="_blank">Official Comic Info</a>.</p>
+        const comicCard = `
+        <div id="comicsCard" class="comics-card"> 
+            <div class="comic-profile-layout">
+                <div class="comicDP">
+                    <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
+                </div>
+                <div class="comicDetails">
+                    <h1>${comicTitle}</h1>
+                    <h3>Editor: ${comicCreator}.</h3>
+                    <p><a href="${comicInfo}" target="_blank">Official Comic Info</a>.</p>
+                </div>
             </div>
         </div>
-    </div>
-    `;
-    
-    // append herocard to container
-    comicCardContainer.innerHTML += comicCard;
+        `;
+         comicCardContainer.innerHTML += comicCard;
+    });
 };
 
 // Separate function to show hero cards

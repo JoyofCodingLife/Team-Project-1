@@ -370,14 +370,15 @@ To set the beginning and end state of animation, we use the keywords from and to
 .comic-layout-wrapper {
 	/* height: 100vh; */
 	display: flex;
-	background-color: #122023;
+	/* background-color: #122023; */
+	background-color: transparent;
 	width: 100%;
-
 }
+
 .comics-card {
 	flex-basis: 100%;
 	border: 2px solid #0AE0DF;
-	max-width: 40em;
+	max-width: 100em;
 	margin: auto;
 	color: #fff;
 	padding: 1em;
@@ -392,7 +393,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 	flex-basis: 50%;
 	position: relative;
 	height: fit-content;
-	align-self: center;
+	/* align-self: center; */
 }
 
 .comicDP img {
@@ -407,7 +408,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 } */
 
 .comicDetails {
-	flex-grow: 50%;
+	/* flex-grow: 50%; */
 	padding: 1em;
 	font-family: 'Orbitron', sans-serif;
 }
