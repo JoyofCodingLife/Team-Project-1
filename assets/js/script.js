@@ -238,7 +238,7 @@ function showHeroCards(hero) {
 // Function to clear contents of hero card
 function clearHeroCards() {
     heroCardContainer.innerHTML = "";
-    // comicCardContainer.innerHTML = "";
+    comicsCardContainer.innerHTML = "";
 };
 
 // Search input

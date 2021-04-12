@@ -105,7 +105,7 @@ h1:hover {
 	animation: glow 1s ease-in-out infinite alternate;
   }
   
-  @-webkit-keyframes glow {
+  @keyframes glow {
 	from {
 	  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #069df9, 0 0 40px #069df9, 0 0 50px #069df9, 0 0 60px #069df9, 0 0 70px #069df9;
 	}
@@ -346,7 +346,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 
 
 .heroCardDesc {
-	flex-grow: 50%;
+	flex-basis: 50%;
 	padding: 1em;
 	font-family: 'Orbitron', sans-serif;
 }
@@ -389,15 +389,15 @@ To set the beginning and end state of animation, we use the keywords from and to
 .comic-layout-wrapper {
 	/* height: 100vh; */
 	display: flex;
-	/* background-color: #122023; */
 	background-color: transparent;
 	width: 100%;
+	flex-wrap: wrap;
 }
 
 .comics-card {
 	flex-basis: 100%;
 	border: 2px solid #0AE0DF;
-	max-width: 100em;
+	max-width: 30em;
 	margin: auto;
 	color: #fff;
 	padding: 1em;
@@ -427,7 +427,6 @@ To set the beginning and end state of animation, we use the keywords from and to
 } */
 
 .comicDetails {
-	/* flex-grow: 50%; */
 	padding: 1em;
 	font-family: 'Orbitron', sans-serif;
 }
@@ -700,7 +699,7 @@ p span {
 
 .fa-github {
 	color: var(--white);
-	size: 3x;
+	size: 3px;
 }
 
 /* This container is needed to position the front and back side */
