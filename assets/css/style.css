@@ -1,9 +1,11 @@
 /* FONTS IMPORT */ 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 /*
 Marvel font alternative
 font-family: 'Noto Sans KR', sans-serif;
+Computer style
+font-family: 'Orbitron', sans-serif;
 */
 
 /* GLOBAL */
@@ -280,7 +282,7 @@ input {
 	animation-timing-function: linear;
 }
 
-/* To define the arc animation, utilisng @keyframes . 
+/* To define the arc animation, utilising @keyframes . 
 To set the beginning and end state of animation, we use the keywords from and to. */
 
 @keyframes rotate-anticlock {
