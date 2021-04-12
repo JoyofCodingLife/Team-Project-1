@@ -72,9 +72,13 @@ engageSearchBtn.addEventListener("click", engageSearch);
 function heroLocator(heroName) {
 
     // Storage
-    searchHistoryHeroList.unshift(heroName);
-    searchHistoryHeroList.splice(6);
+    if (searchHistoryHeroList.indexOf(heroName) == -1) {
+        searchHistoryHeroList.unshift(heroName);
+        searchHistoryHeroList.splice(6);
+    }
+    
     displaySearchHistoryHeroList();
+
     localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(searchHistoryHeroList));
         
         // If no hero name, return error
@@ -86,6 +90,7 @@ function heroLocator(heroName) {
 
             return;
     }
+
 
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
