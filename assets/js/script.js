@@ -15,6 +15,7 @@ let mostWantedEl = document.querySelector("#most-wanted");
 
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
+let comicCardContainer = document.querySelector("#comicsCardContainer");
 
 let errorMessageEl = document.querySelector("#error-message");
 let hydraLogoEl = document.querySelector("#hydra-logo");
@@ -45,16 +46,16 @@ window.onload = function () {
 };
 
 // Function to clean up search function parameters
-function cleanSearchParams() {
+// function cleanSearchParams() {
 
-    // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
-    let heroSearchParamsArr = document.location.search.split('&');
+//     // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
+//     let heroSearchParamsArr = document.location.search.split('&');
 
-    // Get the query and format values
-    let query = herosearchParamsArr[0].split('=').pop();
+//     // Get the query and format values
+//     let query = herosearchParamsArr[0].split('=').pop();
 
-    getMarvelAPI(query);
-};
+//     getMarvelAPI(query);
+// };
 
 // Engage function (to display search bar)
 function engageSearch() {
@@ -104,13 +105,15 @@ function heroLocator(heroName) {
            // Always use the first result
            wrongHeroEl.style.display = "none";
            let result = data.results[0];
-           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`
-        };
+           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
+           let heroID = data.results[0].id;
+           showHeroCards(data);
 
-        if (data.total !== 0) {
-            showHeroCards(data);
-        } else {
-            return console.error("No heroes found!")};
+           let comicBookUrl = buildApiUrl(`characters/${heroID}/comics`);
+           return fetchJsonData(comicBookUrl).then(function(jsonData) {
+               displayComicData(jsonData.data);
+            });
+        }
     }).catch(function(err) {
         console.log(err);
         console.log("Failed to get hero data!");
@@ -157,12 +160,39 @@ function heroLocator(heroName) {
             }
         });
     }
-    searchVideos ();
+    searchVideos();
 };
 
-// Function to get comic data
-function getHeroComicData() {
 
+function displayComicData(comics) {
+
+    console.log(comics);
+
+    comics.results.forEach((comic) => {
+        // let result = comic.results[0];
+        // console.log(result);
+        console.log(comic);
+        let comicTitle = comic.title;
+        let comicThumbnailUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
+        let comicCreator = comic.creators.items[0].name;
+        let comicInfo = comic.urls[0].url;
+    
+        const comicCard = `
+        <div id="comicsCard" class="comics-card"> 
+            <div class="comic-profile-layout">
+                <div class="comicDP">
+                    <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
+                </div>
+                <div class="comicDetails">
+                    <h1>${comicTitle}</h1>
+                    <h3>Editor: ${comicCreator}.</h3>
+                    <p><a href="${comicInfo}" target="_blank">Official Comic Info</a>.</p>
+                </div>
+            </div>
+        </div>
+        `;
+         comicCardContainer.innerHTML += comicCard;
+    });
 };
 
 // Separate function to show hero cards
@@ -171,30 +201,34 @@ function showHeroCards(hero) {
     let result = hero.results[0];
     let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
     let officialUrls = result.urls;
-    let officialDetail = officialUrls[0];
+    let officialComicLink = officialUrls[2];
     let officialWiki = officialUrls[1];
     let heroImage = thumbnailUrl;
     let heroName = result.name;
+    let heroID = result.id;
     let heroBio = result.description;
-    let heroDetail = officialDetail.url;
+    let heroComicLink = officialComicLink.url;
     let heroWiki = officialWiki.url;
 
     // construct hero card layout
 
     const heroCard = `
-        <div id="heroCard"> 
-        <div id="heroCardTitle">
-        <h3>Hero File Found: ${heroName}</h3>
-        </div>
-        <div class="heroImg">
-        <img src=${heroImage} alt="This is an image of ${heroName}" />
-        </div>
-        <div class="heroDetails">
-        <h4>${heroName}</h4>
-        <h6>${heroBio}</h6>
-        <p>View official hero detail <a href="${heroDetail}">here</a>.</p>
-        <p>View official hero wiki <a href="${heroWiki}">here</a>.</p>
-        </div>
+        <div id="heroCard" class="id-card"> 
+            <div class="profile-row">
+                <div class="heroCardDP">
+                    <div class="dp-arc-outer"></div>
+                    <div class="dp-arc-inner"></div>
+                    <img class="heroImage" src=${heroImage} alt="This is an image of ${heroName}" />
+                </div>
+                <div class="heroCardDesc">
+                    <div class="heroDetails">
+                        <h1>${heroName}</h1>
+                        <h1>ID#${heroID}</h1>
+                        <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a>.</p>
+                        <p><a href="${heroComicLink}" target="_blank">Official Comic Appearances</a>.</p>
+                    </div>
+                </div>
+            </div>
         </div>
         `;
 
@@ -205,6 +239,7 @@ function showHeroCards(hero) {
 // Function to clear contents of hero card
 function clearHeroCards() {
     heroCardContainer.innerHTML = "";
+    // comicCardContainer.innerHTML = "";
 };
 
 // Search input
