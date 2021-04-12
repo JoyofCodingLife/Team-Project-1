@@ -40,14 +40,10 @@ https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
 ### Webpage Preview
 The following images show the web application's appearance.
 
-![Website Preview](./assets/images/WebsitePreview.png)
-![Website Wireframe](./assets/images/marvelWireframe.png)
-![Website Flow](./assets/images/userProcessModelFlowV1.png)
+![Website Preview](./assets/images/websiteLoadingScreen.png)
+![Website Wireframe](./assets/images/websiteWireframe.png)
+![Website Flow](./assets/images/websiteFlowDiagram.png)
 <br>
-
-Versions of Home Page
-![Website v1](./assets/images/v1.png)
-![Website v2](./assets/images/v2.png)
 
 ## Contributing
 
