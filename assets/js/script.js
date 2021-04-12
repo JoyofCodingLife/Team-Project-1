@@ -62,7 +62,6 @@ function engageSearch() {
     engageSearchEl.style.display = "none";
     heroSearchForm.style.display = "flex";
     mostWantedEl.style.display = "block";
-
 };
 
 // Engage button event listener
@@ -159,7 +158,7 @@ function heroLocator(heroName) {
         });
     }
     searchVideos ();
-}
+};
 
 // Function to get comic data
 function getHeroComicData() {
@@ -201,7 +200,6 @@ function showHeroCards(hero) {
 
     // append herocard to container
     heroCardContainer.innerHTML += heroCard;
-
 };
 
 // Function to clear contents of hero card
@@ -230,7 +228,7 @@ function buildApiUrl(apiPath) {
  * search without having to constantly make new requests.
  *
  * See heroes.js for the list.
- */
+*/
 
 function buildHeroList() {
 
@@ -285,8 +283,6 @@ function displayFavouriteHeroList() {
     });
 };
 
-
-// EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
 
 searchButtonEl.addEventListener("click", function (event) {
@@ -306,7 +302,6 @@ searchInputEl.addEventListener("keyup", function(event) {
 $(searchInputEl).autocomplete({source: HeroList});
 displayFavouriteHeroList();
 
-
 // Navigation 
 document.querySelector("#galleryLink").onclick = function () {
     NavBarEl.style.display = "block";
@@ -317,7 +312,6 @@ document.querySelector("#galleryLink").onclick = function () {
     galleryEl.style.display = "block";
     aboutUsEl.style.display = "none";
     footerEl.style.display = "none";
-
 };
 
 document.querySelector("#aboutUsLink").onclick = function () {
@@ -352,6 +346,3 @@ document.querySelector("#locatorLink").onclick = function () {
     aboutUsEl.style.display = "none";
     footerEl.style.display = "none";
 };
-
-
-

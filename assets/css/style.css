@@ -10,10 +10,9 @@ font-family: 'Noto Sans KR', sans-serif;
 :root {
     --white: #ffffff;
     --marvel-red:  #ed1d24;
-	  --gentlered: rgb(214, 148, 148);
+	--gentlered: rgb(214, 148, 148);
     --black: #000000;
-	  --shield-blue: #069df9;
-
+	--shield-blue: #069df9;
 }
 
 *, *::before, *::after {
@@ -90,6 +89,25 @@ h1:hover {
   	-webkit-transition: all 0.2s ease-in;
   	transition: all 0.2s ease-in;
 }
+
+/* glowing effect */
+.glow {
+	font-size: 80px;
+	color: #fff;
+	text-align: center;
+	-webkit-animation: glow 1s ease-in-out infinite alternate;
+	-moz-animation: glow 1s ease-in-out infinite alternate;
+	animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  @-webkit-keyframes glow {
+	from {
+	  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #069df9, 0 0 40px #069df9, 0 0 50px #069df9, 0 0 60px #069df9, 0 0 70px #069df9;
+	}
+	to {
+	  text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+	}
+  }
 
 .text-1 {
     font-size: 250px;
@@ -198,8 +216,6 @@ input {
 
 }
 
-
-
 .searchBtn {
     padding: 0.7rem;
     border-radius: 0.3rem;
@@ -211,7 +227,11 @@ input {
 
 /* RESULT CARDS SECTION */
 
-
+/* hover for cards 
+:hover {
+	box-shadow: inset 0px 0px 8px var(--shield-blue), 0 0 15px var(--shield-blue);
+}
+*/
 
 /* Hero Section
 
@@ -628,8 +648,8 @@ p span {
 
 /* RESPONSIVE LAYOUT */ 
 
-@media screen and (max-width: 720px) {
-    .accordion { 
+@media	screen and (max-width: 720px) {
+	.accordion { 
 		width: 540px; 
 	}
 	
