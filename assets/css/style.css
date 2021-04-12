@@ -66,7 +66,7 @@ a:hover {
 .home {
     display: flex;
     /* Settings for v1 - full picture background */
-    background: url("../images/background-1.jpg") no-repeat center; 
+    background: url("../images/homeBackground.jpg") no-repeat center; 
     height: 100vh;
     min-height: 500px;
     background-size: cover;
@@ -718,27 +718,27 @@ p span {
 
 /* Our team photos */
 #agent_kate_front {
-	background-image: url(../images/Agents/AgentKate.jpg);
+	background-image: url(../images/ourTeam/agentKate.jpg);
 }
 
 #agent_kate_back {
-	background-image: url(../images/Agents/alterEgoKate.jpg);
+	background-image: url(../images/ourTeam/alterEgoKate.jpg);
 }
 
 #agent_aaron_front {
-	background-image: url(../images/Agents/AgentAaron.jpg);
+	background-image: url(../images/ourTeam/agentAaron.jpg);
 }
 
 #agent_aaron_back {
-	background-image: url(../images/Agents/alterEgoAaron.jpg);
+	background-image: url(../images/ourTeam/alterEgoAaron.jpg);
 }
 
 #agent_lara_front {
-	background-image: url(../images/Agents/AgentLara.jpg);
+	background-image: url(../images/ourTeam/agentLara.jpg);
 }
 
 #agent_lara_back {
-	background-image: url(../images/Agents/alterEgoLara.jpg);
+	background-image: url(../images/ourTeam/alterEgoLara.jpg);
 }
 /* fixed issue due to renaming folders */
 
@@ -792,11 +792,10 @@ p span {
 
 
 /* FOOTER SECTION */
-#imginthefooter {       
-
+#footerImage {       
 	display: flex;
     /* Settings for v1 - full picture background */
-    background: url("../images/background-1.jpg") no-repeat center; 
+    background: url("../images/homeBackground.jpg") no-repeat center; 
     height: 100vh;
     background-size: cover;
     background-attachment: fixed;
