@@ -9,7 +9,7 @@
   <!-- STYLE FILES -->
   <!-- JavaScript for Icons from FontAwesome -->
   <script src="https://kit.fontawesome.com/1228d6a68f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet"href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
   <!-- Reset Style -->
   <link rel="stylesheet" href="./assets/css/reset.css" />
   <!-- Personal Style -->
@@ -47,17 +47,25 @@
       <button id="engageBtn">ENGAGE HERO LOCATOR PROTOCOL</button>
     </div>
     <div id="heroSearchForm" class="hide">
-      <input class="search" type="search" placeholder="Enter Hero Name.">
+      <label>
+        <input class="search" type="search" placeholder="Enter Hero Name."/>
+      </label>
       <button class="searchBtn"><i class="fas fa-search"></i></button>
-
     </div>
+    <!-- Favourite Hero -->
+    <section id="most-wanted" class="hide">
+      <h2 id="favourite-title"></h2>
+      <div id="favourite-hero" class="row"></div>
+    </section>
+
+    <div>
       <div id="wrong-hero">
           <h1 id="warning-message"></h1>
           <img id="hydra-logo"/>
           <h2 id="error-message"></h2>
       </div>
 
-  </div>
+    </div>
 
   <!-- RESULT CARDS SECTION -->
   <div id="cardSection">
@@ -227,6 +235,7 @@
   ​<div id="footer">
     <div id="imginthefooter"></div>    
   </div>
+
 
   <!-- JAVASCRIPT FILES -->
    <!-- jQuery JS -->

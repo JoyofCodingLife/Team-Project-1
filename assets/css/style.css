@@ -13,6 +13,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	  --gentlered: rgb(214, 148, 148);
     --black: #000000;
 	  --shield-blue: #069df9;
+
 }
 
 *, *::before, *::after {
@@ -155,7 +156,7 @@ input {
 	width: 300px;
 }
 
-.ui-menu-item {
+.ui-menu-item-wrapper {
 	background-color: var(--white);
 	color: var(--black);
 }
@@ -163,10 +164,24 @@ input {
 .ui-widget.ui-widget-content {
 	line-height: 1.5;
 }
+.ui-menu-item-wrapper:hover {
+	background-color: var(--marvel-red);
+	color: var(--white);
+	border: var(--marvel-red);
+}
+
+.ui-widget.ui-widget-content {
+	line-height: 1.5;
+
+}
 
 #error-message {
 	padding: 4rem;
 }
+#wrong-hero {
+	width: 80%;
+}
+
 
 #hydra-logo {
 	width: 10rem;
@@ -180,12 +195,10 @@ input {
 .ui-menu-item:hover {
 	background-color: var(--marvel-red);
 	color: var(--white);
-}
-
-.ui-widget.ui-widget-content {
-	line-height: 1.5;
 
 }
+
+
 
 .searchBtn {
     padding: 0.7rem;
@@ -517,6 +530,7 @@ p span {
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
 	  height: inherit;
+
 }
 
 .flip-card-front div, .flip-card-back div {
@@ -564,6 +578,42 @@ p span {
     transform: rotateY(180deg);
 }
 
+/* Favourite Hero Section*/
+
+#favourite-title {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+#favourite-hero {
+	display: flex;
+	padding: 2rem;
+	flex-wrap: wrap;
+	justify-content: center;
+
+}
+
+#favourite-hero button {
+	background-color: var(--marvel-red);
+	color: var(--white);
+	font-size: 1.2rem;
+	border: 1pc solid var(--marvel-red);
+	border-radius: 0.3rem;
+	margin: 0.5rem;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.column {
+	float: left;
+	width: 25%;
+}
+
+
 /* FOOTER SECTION */
 #imginthefooter {       
 
@@ -574,6 +624,7 @@ p span {
     background-size: cover;
     background-attachment: fixed;
 }​​​​​​​​​
+
 
 /* RESPONSIVE LAYOUT */ 
 

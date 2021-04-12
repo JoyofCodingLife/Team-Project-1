@@ -10,14 +10,23 @@ let searchInputEl = document.querySelector(".search");
 let engageSearchEl = document.querySelector("#engageSearchProtocol");
 let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
+
+let mostWantedEl = document.querySelector("#most-wanted");
+
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
+
 
 
 let errorMessageEl = document.querySelector("#error-message")
 let hydraLogoEl = document.querySelector("#hydra-logo")
 let warningMessageEl = document.querySelector("#warning-message")
 let wrongHeroEl = document.querySelector("#wrong-hero");
+
+
+let videoResultEl = $("#videoResults");
+
+}
 
 let NavBarEl = document.querySelector(".navbar");
 let homeEl = document.querySelector("#homeSection");
@@ -27,6 +36,13 @@ let videoResultEl = document.querySelector("#videoSection");
 let galleryEl = document.querySelector("#gallerySection");
 let aboutUsEl = document.querySelector("#aboutUsSection");
 let footerEl = document.querySelector("#footer")
+
+// Storage
+let favouriteHeroList = [];
+let STORAGE_FAV_HERO_KEY = "favourite-hero";
+let storedFavHeros = localStorage.getItem(STORAGE_FAV_HERO_KEY);
+if (storedFavHeros !==null) {
+    favouriteHeroList = JSON.parse(storedFavHeros);
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -53,18 +69,25 @@ function engageSearch() {
 
     engageSearchEl.style.display = "none";
     heroSearchForm.style.display = "flex";
+    mostWantedEl.style.display = "block";
+
 };
 
 // Engage button event listener
 engageSearchBtn.addEventListener("click", engageSearch);
 
 // Search function
-function heroLocator(event) {
+function heroLocator(heroName) {
+
+    // Storage
+    favouriteHeroList.unshift(heroName);
+    favouriteHeroList.splice(6);
+    displayFavouriteHeroList();
+    localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(favouriteHeroList));
 
     event.preventDefault();
 
-    // Variables needed for search function
-    let heroName = searchInputEl.value;
+
 
     // If no hero name, return error
     if (!heroName) {
@@ -76,6 +99,8 @@ function heroLocator(event) {
         return;
     }
 
+
+
     // See https://developer.marvel.com/docs#!/public/getCreatorCollection_get_0
     fetchJsonData(buildApiUrl("characters") + `&name=${heroName}`).then(function(jsonData) {
 
@@ -84,7 +109,8 @@ function heroLocator(event) {
         let data = jsonData.data;
 
        if (data.total === 0) {
-           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again.";
+           wrongHeroEl.style.display = "inline-block";
+           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again later.";
            hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
            warningMessageEl.innerHTML = "Warning:";
            console.error("No heroes found!");
@@ -256,20 +282,46 @@ function buildHeroList() {
     });
 }
 
-// need a function to renderHeroResults (this will have us dynamically changing HTML and CSS)
-function renderHeroResults() {
 
+function displayFavouriteHeroList() {
+
+    let favouriteHeroContainer = $("#favourite-hero");
+    $("#favourite-title").html("Your Most Wanted Heroes");
+    favouriteHeroContainer.find("button").remove();
+    favouriteHeroList.forEach(function (heroName) {
+        let favouriteHeroButton = $("<button></button>");
+        favouriteHeroButton.addClass("column");
+        favouriteHeroButton.append(heroName);
+        favouriteHeroButton.appendTo(favouriteHeroContainer);
+        favouriteHeroButton.click(function () {
+            heroLocator(heroName);
+            // searchInputEl.scrollIntoView(true);
+            $('html,body').animate({
+                    scrollTop: $(".search").offset().top},
+                'slow');
+        });
+    })
 }
 
 
 // EVENT LISTENERS section ----------------------------------------------
 // Search button event listener
-searchButtonEl.addEventListener("click", function(event){
+
+searchButtonEl.addEventListener("click", function (event) {
     clearHeroCards();
-    heroLocator(event);
+    heroLocator(searchInputEl.value);
+
+});
+searchInputEl.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        searchButtonEl.click();
+    }
+
 });
 
 $(searchInputEl).autocomplete({source: HeroList});
+displayFavouriteHeroList();
 
 
 // Navigation 
