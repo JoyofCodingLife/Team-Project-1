@@ -184,8 +184,7 @@ function displayComicData(comics) {
                 </div>
                 <div class="comicDetails">
                     <h1>${comicTitle}</h1>
-                    <h3>Editor: ${comicCreator}.</h3>
-                    <p><a href="${comicInfo}" target="_blank">Official Comic Info</a>.</p>
+                    <p><a href="${comicInfo}" target="_blank">Official Comic Info</a></p>
                 </div>
             </div>
         </div>
@@ -205,7 +204,6 @@ function showHeroCards(hero) {
     let heroImage = thumbnailUrl;
     let heroName = result.name;
     let heroID = result.id;
-    let heroBio = result.description;
     let heroComicLink = officialComicLink.url;
     let heroWiki = officialWiki.url;
 
@@ -222,9 +220,9 @@ function showHeroCards(hero) {
                 <div class="heroCardDesc">
                     <div class="heroDetails">
                         <h1>${heroName}</h1>
-                        <h1>ID#${heroID}</h1>
-                        <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a>.</p>
-                        <p><a href="${heroComicLink}" target="_blank">Official Comic Appearances</a>.</p>
+                        <h2 class="file-id">ID#${heroID}</h2>
+                        <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a></p>
+                        <p><a href="${heroComicLink}" target="_blank">Official Comic Appearances</a></p>
                     </div>
                 </div>
             </div>
