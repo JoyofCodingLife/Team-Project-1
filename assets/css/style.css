@@ -120,7 +120,7 @@ h1:hover {
 /* SEARCH SECTION */
 
 h2 {
-    font-size: 2.25rem;
+    font-size: 36px;
     display: block;
     font-weight: bold;
 }
@@ -130,25 +130,25 @@ form {
 }
 
 input {
-    padding: 0.5rem;
+    padding: 8px;
     background-color: var(--white);
-    font-size: 1.2rem;
+    font-size: 19.2px;
     border: 1px solid var(--white);
-    border-radius: 0.3rem;
+    border-radius: 4.8px;
 }
 
 #locatorSection {
 	background-color: var(--black);
-	padding: 0.5rem;
-	margin: 0.5rem;
-	border-radius: 0.5rem;
+	padding: 8px;
+	margin: 8px;
+	border-radius: 8px;
 	text-align: center;
 }
 
 #engageBtn {
-	border-radius: 0.5rem;
-	padding: 1rem;
-	margin: 1rem;
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px;
 	background-color: transparent;
 	font-size: larger;
 	color: var(--white);
@@ -166,9 +166,9 @@ input {
 }
 
 #heroSearchForm {
-	border-radius: 0.5rem;
-	padding: 1rem;
-	margin: 1rem;
+	border-radius: 8px;
+	padding: 16px;
+	margin: 16px;
 	background-color: var(--marvel-red);
 	justify-content: center;
 }
@@ -198,7 +198,7 @@ input {
 }
 
 #error-message {
-	padding: 4rem;
+	padding: 64px;
 }
 #wrong-hero {
 	width: 80%;
@@ -206,11 +206,11 @@ input {
 
 
 #hydra-logo {
-	width: 10rem;
+	width: 160px;
 }
 
 #warning-message {
-	padding: 4rem;
+	padding: 64px;
 	color: var(--marvel-red);
 }
 
@@ -221,8 +221,8 @@ input {
 }
 
 .searchBtn {
-    padding: 0.7rem;
-    border-radius: 0.3rem;
+    padding: 11.2px;
+    border-radius: 4.8px;
     color: var(--black);
     background-color: var(--white);
     border: none;
@@ -231,7 +231,6 @@ input {
 
 /* HERO MAIN CARD SECTION */
 .hero-card-wrapper {
-	/* height: 100vh; */
 	display: flex;
 	background-color: #122023;
 	width: 100%;
@@ -240,10 +239,10 @@ input {
 .id-card {
 	flex-basis: 100%;
 	border: 2px solid #0AE0DF;
-	max-width: 40em;
+	max-width: 740px;
 	margin: auto;
 	color: #fff;
-	padding: 1em;
+	padding: 16px;
 	box-shadow: 0px 0px 3px 1px #12a0a0, inset 0px 0px 3px 1px #12a0a0;
 }
 
@@ -256,6 +255,7 @@ input {
 	position: relative;
 	height: fit-content;
 	align-self: center;
+	margin: 5px;
 }
 
 .heroImage {
@@ -321,13 +321,13 @@ To set the beginning and end state of animation, we use the keywords from and to
 
 .heroCardDesc {
 	flex-basis: 50%;
-	padding: 1em;
+	padding: 16px;
 	font-family: 'Orbitron', sans-serif;
 }
 
 .heroDetails {
-	padding: 1em;
-	margin: 0.5rem;
+	padding: 16px;
+	margin: 8px;
 	font-family: 'Orbitron', sans-serif;
 	text-shadow: 0px 0px 4px #12a0a0;
 	letter-spacing: 1px;
@@ -335,20 +335,26 @@ To set the beginning and end state of animation, we use the keywords from and to
 
 }
 
-.heroDetails h1 {
+.heroName {
 	font-family: 'Orbitron', sans-serif;
-	text-shadow: 0px 0px 4px #12a0a0;
+	text-shadow: 0px 6px 10px #12a0a0;
 	letter-spacing: 1px;
 	margin: 0px;
 	font-size: 34px;
+	text-transform: uppercase;
+	font-weight: bolder;
 }
 
 .file-id {
 	color: var(--shield-blue);
+	text-transform: uppercase;
+	font-size: 34px;
+	text-transform: uppercase;
+	font-weight: bolder;
 }
 
 .heroDetails p {
-	padding-top: 0.5rem;
+	padding-top: 8px;
 	line-height: 1.6;
 	text-align: center;
 }
@@ -360,7 +366,6 @@ To set the beginning and end state of animation, we use the keywords from and to
 }
 
 #heroCard a:hover {
-	font-size: large;
 	color: var(--white);
 }
 
@@ -368,21 +373,19 @@ To set the beginning and end state of animation, we use the keywords from and to
 
 .comic-layout-wrapper {
 	/* height: 100vh; */
+	margin: 32px 0px;
 	display: flex;
 	background-color: transparent;
 	width: 100%;
 	flex-wrap: wrap;
-	align-items: stretch;
-	align-content: stretch;
 }
 
 .comics-card {
-	flex-basis: 100%;
+	flex-basis: auto;
 	border: 2px solid #0AE0DF;
-	max-width: 30em;
-	margin: auto;
+	max-width: 480px;
 	color: #fff;
-	padding: 1em;
+	padding: 16px;
 	box-shadow: 0px 0px 3px 1px #12a0a0, inset 0px 0px 3px 1px #12a0a0;
 }
 
@@ -393,7 +396,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 .comicDP {
 	flex-basis: 80%;
 	position: relative;
-	height: fit-content;
+	height: inherit;
 }
 
 .comicDP img {
@@ -401,39 +404,29 @@ To set the beginning and end state of animation, we use the keywords from and to
 	border-radius: 10%;
 	display: block;
 	box-shadow: 0px 0px 4px 3px #12a0a0;
+	height: auto;
 }
-
-/* #comicDetails {
-	background-color: var(--white);
-} */
 
 .comicDetails {
 	flex-basis: 20%;
-	padding: 1em;
+	padding: 16px;
 	font-family: 'Orbitron', sans-serif;
 }
 
-.comicDetails h1 {
+.comicTitle {
 	font-family: 'Orbitron', sans-serif;
-	text-shadow: 0px 0px 4px #12a0a0;
+	text-shadow: 0px 6px 10px #12a0a0;
 	letter-spacing: 1px;
 	margin: 0px;
 	font-size: 34px;
-}
-
-.comicDetails h3 {
-	font-family: 'Orbitron', sans-serif;
-	text-shadow: 0px 0px 4px #12a0a0;
-	letter-spacing: 1px;
-	margin: 0px;
-	padding-top: 0.5rem;
-	line-height: 1.6;
+	font-weight: bolder;
+	text-transform: uppercase;
 	text-align: center;
-	font-size: 20px;
+
 }
 
 .comicDetails p {
-	padding-top: 0.5rem;
+	padding-top: 8px;
 	line-height: 1.6;
 	text-align: center;
 }
@@ -486,7 +479,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 	  display: grid;
 	  grid-template-columns: 2fr 1fr;
 	  grid-template-rows: repeat(2, 1fr);
-	  margin: 0 -2em;
+	  margin: 0 -32px;
 	}
 	
 	.video-item {
@@ -494,7 +487,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 	}
 	
 	.video-item iframe {
-	  border: 0.125rem solid transparent;
+	  border: 2px solid transparent;
 	}
   
 	.video-item:nth-child(1) {
@@ -758,13 +751,13 @@ p span {
 /* Search History Hero Section*/
 
 #search-history-title {
-	margin-top: 2rem;
+	margin-top: 32px;
 	text-align: center;
 }
 
 #search-history-hero {
 	display: flex;
-	padding: 2rem;
+	padding: 32px;
 	flex-wrap: wrap;
 	justify-content: center;
 
@@ -773,10 +766,10 @@ p span {
 #search-history-hero button {
 	background-color: var(--marvel-red);
 	color: var(--white);
-	font-size: 1.2rem;
+	font-size: 19.2px;
 	border: 1pc solid var(--marvel-red);
-	border-radius: 0.3rem;
-	margin: 0.5rem;
+	border-radius: 4.8px;
+	margin: 8px;
 }
 
 .row:after {

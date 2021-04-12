@@ -188,7 +188,7 @@ function displayComicData(comics) {
                     <img src=${comicThumbnailUrl} alt="This is an image of ${comicTitle}" />
                 </div>
                 <div class="comicDetails">
-                    <h1>${comicTitle}</h1>
+                    <p class="comicTitle">${comicTitle}</p>
                     <p><a href="${comicInfo}" target="_blank">Official Comic Info</a></p>
                 </div>
             </div>
@@ -224,8 +224,8 @@ function showHeroCards(hero) {
                 </div>
                 <div class="heroCardDesc">
                     <div class="heroDetails">
-                        <h1>${heroName}</h1>
-                        <h2 class="file-id">ID#${heroID}</h2>
+                        <p class="heroName">${heroName}</p>
+                        <p class="file-id">ID#${heroID}</p>
                         <p><a href="${heroWiki}" target="_blank">Official Hero Wiki</a></p>
                         <p><a href="${heroComicLink}" target="_blank">Official Comic Appearances</a></p>
                     </div>
