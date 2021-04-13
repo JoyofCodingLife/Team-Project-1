@@ -1,7 +1,7 @@
 // List of API keys
-    // Spare YouTube API key if reached limit - AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
+    // Spare YouTube API key if reached limit - 1st AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ  2nd AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
-const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
+const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
 const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
@@ -117,18 +117,18 @@ function heroLocator(heroName) {
         //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
         //"part": ["snippet"],
         //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
-        //"maxResults": 10,
+        //"maxResults": 15,  -> pulling 15 results, incase some don't have ID so we can skip them and display 8
         //"order": "videoCount",
         //"q": "surfing" -> what we are looking for?
 
-        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=10&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`; 
+        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=15&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`; 
         $.ajax ({
             url: youtube2APIURL,
             method: "GET",
         }). then (function(youtubeResponse) {
             $(videoResultEl).empty();
             let validCount = 0;
-            for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
+            for (let i = 0; i < youtubeResponse.items.length && validCount < 8; i++ ) {
                 let videoInfo = {
                     title: youtubeResponse.items[i].snippet.title,
                     description: youtubeResponse.items[i].snippet.description,
@@ -140,13 +140,14 @@ function heroLocator(heroName) {
                 }
                 validCount++;
                 let videoCard = $(`
-                <div class="video-item">
-                    <div class="video-wrap">
-                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
-                     <h3>${videoInfo.title}</h3>
-                     <p>${videoInfo.description}</p>
-                    </div>
-                </div>
+                  <div class="videoCard">
+                        <div class="videoContainer">
+                         <iframe class="responsive-iframe" src="https://www.youtube.com/embed/${videoInfo.video}" title="Marvel Channel Video"  allow="fullscreen"></iframe>
+                        </div>
+                        <p class="videoTitle">${videoInfo.title}</p>
+                        <p class="videoDescription">${videoInfo.description}</p>                    
+                  </div>
+
                 `);
                 $(videoResultEl).append(videoCard);
             }
@@ -321,7 +322,6 @@ searchInputEl.addEventListener("keyup", function(event) {
         event.preventDefault();
         searchButtonEl.click();
     }
-
 });
 
 $(searchInputEl).autocomplete({source: HeroList});
