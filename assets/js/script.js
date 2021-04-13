@@ -13,9 +13,6 @@ let searchInputEl = document.querySelector(".search");
 let heroCardContainer = document.querySelector("#heroCardContainer");
 let comicCardContainer = document.querySelector("#comicsCardContainer");
 
-let errorMessageEl = document.querySelector("#error-message");
-let hydraLogoEl = document.querySelector("#hydra-logo");
-let warningMessageEl = document.querySelector("#warning-message");
 let wrongHeroEl = document.querySelector("#wrong-hero");
 
 let navBarEl = document.querySelector(".navbar");
@@ -85,9 +82,9 @@ function heroLocator(heroName) {
 
        if (data.total === 0) {
            wrongHeroEl.style.display = "inline-block";
-           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again later.";
-           hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
-           warningMessageEl.innerHTML = "Warning:";
+           $("#error-message").html("Hero not found. Probably undercover at HYDRA, please try again later.");
+           $("#hydra-logo").attr("src", "assets/images/hydra_logo.png");
+           $("#warning-message").html("Warning:");
            console.error("No heroes found!");
        } else {
            // Always use the first result
