@@ -2,7 +2,7 @@
     // Spare YouTube API key if reached limit - AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
 const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
-const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
+// const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
@@ -32,13 +32,13 @@ let aboutUsEl = document.querySelector("#aboutUsSection");
 let footerEl = document.querySelector("#footer");
 
 // Storage
-// localStorage to store user's favorite heroes (will shorten loading screen since data is saved locally)
+// localStorage to store user's recently search heroes (will shorten loading screen since data is saved locally)
 let searchHistoryHeroList = [];
-let STORAGE_FAV_HERO_KEY = "search-history-hero";
-let storedFavHeros = localStorage.getItem(STORAGE_FAV_HERO_KEY);
-    if (storedFavHeros !==null) {
-    searchHistoryHeroList = JSON.parse(storedFavHeros);
-};
+let STORAGE_SEARCH_HISTORY_KEY = "search-history-hero";
+let storedSearchHistory = localStorage.getItem(STORAGE_SEARCH_HISTORY_KEY);
+    if (storedSearchHistory !==null) {
+    searchHistoryHeroList = JSON.parse(storedSearchHistory);
+}
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
@@ -51,7 +51,7 @@ function engageSearch() {
     engageSearchEl.style.display = "none";
     heroSearchForm.style.display = "flex";
     mostWantedEl.style.display = "block";
-};
+}
 
 // Engage button event listener
 engageSearchBtn.addEventListener("click", engageSearch);
@@ -60,14 +60,14 @@ engageSearchBtn.addEventListener("click", engageSearch);
 function heroLocator(heroName) {
 
     // Storage
-    if (searchHistoryHeroList.indexOf(heroName) == -1) {
+    if (searchHistoryHeroList.indexOf(heroName) === -1) {
         searchHistoryHeroList.unshift(heroName);
         searchHistoryHeroList.splice(6);
     }
     
     displaySearchHistoryHeroList();
 
-    localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(searchHistoryHeroList));
+    localStorage.setItem(STORAGE_SEARCH_HISTORY_KEY, JSON.stringify(searchHistoryHeroList));
         
         // If no hero name, return error
         if (!heroName) {
@@ -111,48 +111,8 @@ function heroLocator(heroName) {
         console.log("Failed to get hero data!");
     });
 
-    function searchVideos() {
 
-        // YOUTUBE API section ----------------------------------------------
-        //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
-        //"part": ["snippet"],
-        //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
-        //"maxResults": 10,
-        //"order": "videoCount",
-        //"q": "surfing" -> what we are looking for?
-
-        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=10&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`; 
-        $.ajax ({
-            url: youtube2APIURL,
-            method: "GET",
-        }). then (function(youtubeResponse) {
-            $(videoResultEl).empty();
-            let validCount = 0;
-            for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
-                let videoInfo = {
-                    title: youtubeResponse.items[i].snippet.title,
-                    description: youtubeResponse.items[i].snippet.description,
-                    video: youtubeResponse.items[i].id.videoId,
-                };
-                // Not all responses have a videoId for some reason.
-                if (videoInfo.video === undefined) {
-                    continue;
-                }
-                validCount++;
-                let videoCard = $(`
-                <div class="video-item">
-                    <div class="video-wrap">
-                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
-                     <h3>${videoInfo.title}</h3>
-                     <p>${videoInfo.description}</p>
-                    </div>
-                </div>
-                `);
-                $(videoResultEl).append(videoCard);
-            }
-        });
-    }
-    searchVideos();
+    searchVideos(heroName);
 };
 
 
@@ -232,16 +192,59 @@ function clearHeroCards() {
     comicsCardContainer.innerHTML = "";
 };
 
+function searchVideos(heroName) {
+
+    // YOUTUBE API section ----------------------------------------------
+    //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
+    //"part": ["snippet"],
+    //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
+    //"maxResults": 10,
+    //"order": "videoCount",
+    //"q": "surfing" -> what we are looking for?
+
+    let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=10&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+    $.ajax ({
+        url: youtube2APIURL,
+        method: "GET",
+    }). then (function(youtubeResponse) {
+        $(videoResultEl).empty();
+        let validCount = 0;
+        for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
+            let videoInfo = {
+                title: youtubeResponse.items[i].snippet.title,
+                description: youtubeResponse.items[i].snippet.description,
+                video: youtubeResponse.items[i].id.videoId,
+            };
+            // Not all responses have a videoId for some reason.
+            if (videoInfo.video === undefined) {
+                continue;
+            }
+            validCount++;
+            let videoCard = $(`
+                <div class="video-item">
+                    <div class="video-wrap">
+                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
+                     <h3>${videoInfo.title}</h3>
+                     <p>${videoInfo.description}</p>
+                    </div>
+                </div>
+                `);
+            $(videoResultEl).append(videoCard);
+        }
+    });
+}
+
 // Search input
 
 // Autocomplete widget for search bar
 function fetchJsonData(url) {
     return fetch(url).then(function(response) {
         if (response.ok) {
-            return response.json()};
+            return response.json()
+        }
         return Promise.reject(response);
     });
-};
+}
 
 function buildApiUrl(apiPath) {
     return `https://gateway.marvel.com/v1/public/${apiPath}?apikey=${marvelPublicAPIKey}`;
