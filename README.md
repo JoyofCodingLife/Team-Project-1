@@ -53,7 +53,7 @@ The Flow Diagram for the website
 ## Webpage Preview
 The following images show the web application's appearance. 
 
-1. This is our web application's loading screen.
+1. This is our web application's landing page.
 ![Webpage Preview](./assets/images/websiteLoadingScreen.png)
 
 2. This is how search results are displayed on our website. 
