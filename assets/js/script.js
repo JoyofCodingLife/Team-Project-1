@@ -7,11 +7,8 @@ const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
 let searchInputEl = document.querySelector(".search");
-let engageSearchEl = document.querySelector("#engageSearchProtocol");
-let heroSearchForm = document.querySelector("#heroSearchForm");
 let engageSearchBtn = document.querySelector("#engageBtn");
 
-let mostWantedEl = document.querySelector("#most-wanted");
 
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
@@ -48,9 +45,9 @@ window.onload = function () {
 // Engage function (to display search bar)
 function engageSearch() {
 
-    engageSearchEl.style.display = "none";
-    heroSearchForm.style.display = "flex";
-    mostWantedEl.style.display = "block";
+    $("#engageSearchProtocol").css("display","none");
+    $("#heroSearchForm").css("display","flex");
+    $("#most-wanted").css("display", "block");
 }
 
 // Engage button event listener
