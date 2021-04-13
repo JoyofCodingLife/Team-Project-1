@@ -118,10 +118,10 @@ function heroLocator(heroName) {
         //"part": ["snippet"],
         //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
         //"maxResults": 15,  -> pulling 15 results, incase some don't have ID so we can skip them and display 8
-        //"order": "videoCount",
+        //"order": "videoCount", or  "order": "relevance" -> last one seems better results
         //"q": "surfing" -> what we are looking for?
 
-        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=15&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`; 
+        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=15&order=relevance&q=${heroName}&key=${youTubeAPIKey}`; 
         $.ajax ({
             url: youtube2APIURL,
             method: "GET",
@@ -355,7 +355,7 @@ document.querySelector("#homeLink").onclick = function () {
     homeEl.style.display = "flex";
     locatorEl.style.display = "block";
     cardResultEl.style.display = "block";
-    videoResultEl.style.display = "grid";
+    videoResultEl.style.display = "flex";
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
     footerEl.style.display = "block";
@@ -366,7 +366,7 @@ document.querySelector("#locatorLink").onclick = function () {
     homeEl.style.display = "flex";
     locatorEl.style.display = "block";
     cardResultEl.style.display = "block";
-    videoResultEl.style.display = "grid";
+    videoResultEl.style.display = "flex";
     galleryEl.style.display = "none";
     aboutUsEl.style.display = "none";
     footerEl.style.display = "none";
