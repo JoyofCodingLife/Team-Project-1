@@ -22,13 +22,16 @@
 
 ## About The Project
 This is our first project created as a team. 
-The main task of the project was to design, build, and deploy a client-side web application that will use information from two 3rd party API.
+The main task of the project was to design, build, and deploy a client-side web application that will use information from two 3rd party APIs.
+
 ### Live URL
 https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
+
 ### Team
 * [Aaron Au Yoong](https://github.com/aaronauyoong)
 * [Kate McColl](https://github.com/katemccoll)
 * [Korolyova Lara](https://github.com/KorolyovaLara)
+
 ## User Story
 **As an** avid Marvel fan or just Marvel-curious,
 
@@ -39,6 +42,7 @@ https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
 **I want** to be presented with options and choices for character exploration,
 
 **So that** my interest keeps growing and I can feel more connected with Marvel Universe.
+
 ## Roadmap
 Our starting point - Wireframe of the website
 ![Webpage Draft](./assets/images/websiteWireframe.png)
@@ -48,7 +52,11 @@ The Flow Diagram for the website
 
 ## Webpage Preview
 The following images show the web application's appearance. 
+
+1. This is our web application's loading screen.
 ![Webpage Preview](./assets/images/websiteLoadingScreen.png)
+
+2. This is how search results are displayed on our website. 
 ![Webpage Search Results](assets/images/websiteSearchResultsExample.png)
 
 
