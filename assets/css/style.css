@@ -504,7 +504,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 }
 
 .accordion {
-	width: 935px; /* width = ( (Number of images - 1) * 50px ) + 335px */ 
+	width: 1295px; /* width = ( (Number of images - 1) * 80px ) + 335px */ 
 	margin: 20px auto;
 	overflow: hidden;
 	box-shadow: 1px 1px 4px var(--shield-blue);
@@ -514,7 +514,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 .accordion figure {
     position: absolute;
 	top: 0;
-	left: 50px; /* width of visible piece */
+	left: 80px; /* width of visible piece */
 	width: 335px;
     box-shadow: 0 0 0 1px rgba(255,255,255,0.6);
     transition: all 0.3s ease-in-out;
@@ -534,7 +534,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 50px; /* just cover visible part */
+	width: 80px; /* just cover visible part */
 	height: 100%;
 	cursor: pointer;
 	border: 0;
@@ -613,7 +613,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 /* ABOUT US SECTION */
 #aboutUsSection {
 	display: none;
-	height: 700px;
+	height: 800px;
 	text-align: center;
 	position: absolute;
 	top: 60px;
@@ -664,7 +664,7 @@ p span {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-	height: 500px;
+	height: 800px;
 }   
 	
 /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -784,6 +784,9 @@ p span {
 	.videoCard {
 		max-width: 40%;
 	}
+	.flip-card-inner {
+		height: 600px;
+	}   
 }
 
 @media (max-width: 1200px) {
@@ -803,9 +806,27 @@ p span {
 		width: 50%;
 		margin: auto;
 	}   
-
-
-		
+	
+	.accordion {
+		width: 935px; /* width = ( (Number of images - 1) * 50px ) + 335px */ 
+	}
+	 
+	.accordion figure { 
+		left: 50px; 
+		width: 335px; 
+	}
+	
+	.accordion input { 
+		width: 50px; 
+	}
+	
+	.accordion input:checked ~ figure { 
+		left: 335px; 
+	}
+	
+	.accordion figcaption span { 
+		font-size: 16px; 
+	}
 }
 
 @media (max-width: 720px) {
