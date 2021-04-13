@@ -7,7 +7,6 @@ const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
 // Define main variables
 let searchButtonEl = document.querySelector(".searchBtn");
 let searchInputEl = document.querySelector(".search");
-let engageSearchBtn = document.querySelector("#engageBtn");
 
 
 // let heroCardContainer = document.querySelector("#heroLocatorResults");    
@@ -51,7 +50,7 @@ function engageSearch() {
 }
 
 // Engage button event listener
-engageSearchBtn.addEventListener("click", engageSearch);
+$("#engageBtn").click(engageSearch);
 
 // Search function
 function heroLocator(heroName) {
@@ -324,7 +323,7 @@ searchInputEl.addEventListener("keyup", function(event) {
 
 });
 
-$(searchInputEl).autocomplete({source: HeroList});
+$(".search").autocomplete({source: HeroList});
 displaySearchHistoryHeroList();
 
 // Navigation 
