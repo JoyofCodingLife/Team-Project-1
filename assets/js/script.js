@@ -5,24 +5,11 @@ const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
 // const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
-let searchButtonEl = document.querySelector(".searchBtn");
+
 let searchInputEl = document.querySelector(".search");
-
-
-// let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
 let comicCardContainer = document.querySelector("#comicsCardContainer");
 
-let wrongHeroEl = document.querySelector("#wrong-hero");
-
-let navBarEl = document.querySelector(".navbar");
-let homeEl = document.querySelector("#homeSection");
-let locatorEl = document.querySelector("#locatorSection");
-let cardResultEl = document.querySelector("#cardSection");
-let videoResultEl = document.querySelector("#videoSection");
-let galleryEl = document.querySelector("#gallerySection");
-let aboutUsEl = document.querySelector("#aboutUsSection");
-let footerEl = document.querySelector("#footer");
 
 // Storage
 // localStorage to store user's recently search heroes (will shorten loading screen since data is saved locally)
@@ -38,16 +25,6 @@ window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
 };
 
-// Engage function (to display search bar)
-function engageSearch() {
-
-    $("#engageSearchProtocol").css("display","none");
-    $("#heroSearchForm").css("display","flex");
-    $("#most-wanted").css("display", "block");
-}
-
-// Engage button event listener
-$("#engageBtn").click(engageSearch);
 
 // Search function
 function heroLocator(heroName) {
@@ -81,14 +58,14 @@ function heroLocator(heroName) {
         let data = jsonData.data;
 
        if (data.total === 0) {
-           wrongHeroEl.style.display = "inline-block";
+           $("#wrong-hero").css("display", "inline-block");
            $("#error-message").html("Hero not found. Probably undercover at HYDRA, please try again later.");
            $("#hydra-logo").attr("src", "assets/images/hydra_logo.png");
            $("#warning-message").html("Warning:");
            console.error("No heroes found!");
        } else {
            // Always use the first result
-           wrongHeroEl.style.display = "none";
+           $("#wrong-hero").css("display", "none");
            let result = data.results[0];
            let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
            let heroID = data.results[0].id;
@@ -106,7 +83,7 @@ function heroLocator(heroName) {
 
 
     searchVideos(heroName);
-};
+}
 
 
 function displayComicData(comics) {
@@ -137,7 +114,7 @@ function displayComicData(comics) {
         `;
          comicCardContainer.innerHTML += comicCard;
     });
-};
+}
 
 // Separate function to show hero cards
 function showHeroCards(hero) {
@@ -177,13 +154,13 @@ function showHeroCards(hero) {
 
     // append herocard to container
     heroCardContainer.innerHTML += heroCard;
-};
+}
 
 // Function to clear contents of hero card
 function clearHeroCards() {
     heroCardContainer.innerHTML = "";
-    comicsCardContainer.innerHTML = "";
-};
+    comicCardContainer.innerHTML = "";
+}
 
 function searchVideos(heroName) {
 
@@ -200,7 +177,7 @@ function searchVideos(heroName) {
         url: youtube2APIURL,
         method: "GET",
     }). then (function(youtubeResponse) {
-        $(videoResultEl).empty();
+        $("#videoSection").empty();
         let validCount = 0;
         for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
             let videoInfo = {
@@ -222,7 +199,7 @@ function searchVideos(heroName) {
                     </div>
                 </div>
                 `);
-            $(videoResultEl).append(videoCard);
+            $("#videoSection").append(videoCard);
         }
     });
 }
@@ -241,7 +218,7 @@ function fetchJsonData(url) {
 
 function buildApiUrl(apiPath) {
     return `https://gateway.marvel.com/v1/public/${apiPath}?apikey=${marvelPublicAPIKey}`;
-};
+}
 
 /**
  * Repeatedly request heroes from the API to build a list of all heroes. We don't call this as part of the actual
@@ -282,7 +259,7 @@ function buildHeroList() {
     }).catch(function(err) {
         console.log("Failed to build hero list: " + err);
     });
-};
+}
 
 function displaySearchHistoryHeroList() {
 
@@ -302,20 +279,32 @@ function displaySearchHistoryHeroList() {
                 'slow');
         });
     });
-};
+}
+
+// Engage function (to display search bar)
+function engageSearch() {
+
+    $("#engageSearchProtocol").css("display","none");
+    $("#heroSearchForm").css("display","flex");
+    $("#most-wanted").css("display", "block");
+}
+
+// Engage button event listener
+$("#engageBtn").click(engageSearch);
+
 
 // Search button event listener
 
-searchButtonEl.addEventListener("click", function (event) {
+$(".searchBtn").click(function (event) {
+    event.preventDefault();
     clearHeroCards();
     heroLocator(searchInputEl.value);
 
 });
 
-searchInputEl.addEventListener("keyup", function(event) {
+$(".search").on("keyup", function(event) {
     if (event.keyCode === 13) {
-        event.preventDefault();
-        searchButtonEl.click();
+        $(".searchBtn").click();
     }
 
 });
@@ -323,47 +312,49 @@ searchInputEl.addEventListener("keyup", function(event) {
 $(".search").autocomplete({source: HeroList});
 displaySearchHistoryHeroList();
 
+
+
 // Navigation 
 document.querySelector("#galleryLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "none";
-    locatorEl.style.display = "none";
-    cardResultEl.style.display = "none";
-    videoResultEl.style.display = "none";
-    galleryEl.style.display = "block";
-    aboutUsEl.style.display = "none";
-    footerEl.style.display = "none";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "none");
+    $("#locatorSection").css("display", "none");
+    $("#cardSection").css("display", "none");
+    $("#videoSection").css("display", "none");
+    $("#gallerySection").css("display", "block");
+    $("#aboutUsSection").css("display", "none");
+    $("#footer").css("display", "none");
+}
 
 document.querySelector("#aboutUsLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "none";
-    locatorEl.style.display = "none";
-    cardResultEl.style.display = "none";
-    videoResultEl.style.display = "none";
-    galleryEl.style.display = "none";
-    aboutUsEl.style.display = "block";
-    footerEl.style.display = "none";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "none");
+    $("#locatorSection").css("display", "none");
+    $("#cardSection").css("display", "none");
+    $("#videoSection").css("display", "none");
+    $("#gallerySection").css("display", "none");
+    $("#aboutUsSection").css("display", "block");
+    $("#footer").css("display", "none");
+}
 
 document.querySelector("#homeLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "flex";
-    locatorEl.style.display = "block";
-    cardResultEl.style.display = "block";
-    videoResultEl.style.display = "grid";
-    galleryEl.style.display = "none";
-    aboutUsEl.style.display = "none";
-    footerEl.style.display = "block";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "flex");
+    $("#locatorSection").css("display", "block");
+    $("#cardSection").css("display", "block");
+    $("#videoSection").css("display", "grid");
+    $("#gallerySection").css("display", "none");
+    $("#aboutUsSection").css("display", "none");
+    $("#footer").css("display", "block");
+}
 
 document.querySelector("#locatorLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "flex";
-    locatorEl.style.display = "block";
-    cardResultEl.style.display = "block";
-    videoResultEl.style.display = "grid";
-    galleryEl.style.display = "none";
-    aboutUsEl.style.display = "none";
-    footerEl.style.display = "none";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "flex");
+    $("#locatorSection").css("display", "block");
+    $("#cardSection").css("display", "block");
+    $("#videoSection").css("display", "grid");
+    $("#gallerySection").css("display", "none");
+    $("#aboutUsSection").css("display", "none");
+    $("#footer").css("display", "none");
+}
