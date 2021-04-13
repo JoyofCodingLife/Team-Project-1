@@ -1,8 +1,7 @@
 // List of API keys
-    // Spare YouTube API key if reached limit - AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ
+    // Spare YouTube API key if reached limit - 1st AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ  2nd AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
 const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
-// const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
 
 // Define main variables
 
@@ -83,6 +82,7 @@ function heroLocator(heroName) {
 
     searchVideos(heroName);
 }
+
 
 
 function displayComicData(comics) {
@@ -246,7 +246,7 @@ function buildHeroList() {
         if (currentCount < data.total) {
             return fetchJsonData(characterApiUrl + `&offset=${currentCount}`).then(handleResponse);
         }
-    };
+    }
 
     // Start requesting chunks of data
     fetchJsonData(characterApiUrl).then(handleResponse).then(function() {
@@ -301,7 +301,6 @@ $(".search").on("keyup", function(event) {
     if (event.keyCode === 13) {
         $(".searchBtn").click();
     }
-
 });
 
 $(searchInputEl).autocomplete({source: HeroList});
@@ -333,6 +332,7 @@ document.querySelector("#aboutUsLink").onclick = function () {
 }
 
 document.querySelector("#homeLink").onclick = function () {
+
     $(".navbar").css("display", "block");
     $("#homeSection").css("display", "flex");
     $("#locatorSection").css("display", "block");
