@@ -1,73 +1,42 @@
 // List of API keys
     // Spare YouTube API key if reached limit - 1st AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ  2nd AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
-const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
-const marvelChannelID = "UCvC4D8onUfXzvjTOM-dBfEA";
+const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
 
 // Define main variables
-let searchButtonEl = document.querySelector(".searchBtn");
+
 let searchInputEl = document.querySelector(".search");
-let engageSearchEl = document.querySelector("#engageSearchProtocol");
-let heroSearchForm = document.querySelector("#heroSearchForm");
-let engageSearchBtn = document.querySelector("#engageBtn");
-
-let mostWantedEl = document.querySelector("#most-wanted");
-
-// let heroCardContainer = document.querySelector("#heroLocatorResults");    
 let heroCardContainer = document.querySelector("#heroCardContainer");
 let comicCardContainer = document.querySelector("#comicsCardContainer");
-
-let errorMessageEl = document.querySelector("#error-message");
-let hydraLogoEl = document.querySelector("#hydra-logo");
-let warningMessageEl = document.querySelector("#warning-message");
-let wrongHeroEl = document.querySelector("#wrong-hero");
-
-let navBarEl = document.querySelector(".navbar");
-let homeEl = document.querySelector("#homeSection");
-let locatorEl = document.querySelector("#locatorSection");
-let cardResultEl = document.querySelector("#cardSection");
 let videoResultEl = document.querySelector("#videoSection");
-let galleryEl = document.querySelector("#gallerySection");
-let aboutUsEl = document.querySelector("#aboutUsSection");
-let footerEl = document.querySelector("#footer");
 
 // Storage
-// localStorage to store user's favorite heroes (will shorten loading screen since data is saved locally)
+// localStorage to store user's recently search heroes (will shorten loading screen since data is saved locally)
 let searchHistoryHeroList = [];
-let STORAGE_FAV_HERO_KEY = "search-history-hero";
-let storedFavHeros = localStorage.getItem(STORAGE_FAV_HERO_KEY);
-    if (storedFavHeros !==null) {
-    searchHistoryHeroList = JSON.parse(storedFavHeros);
-};
+let STORAGE_SEARCH_HISTORY_KEY = "search-history-hero";
+let storedSearchHistory = localStorage.getItem(STORAGE_SEARCH_HISTORY_KEY);
+    if (storedSearchHistory !==null) {
+    searchHistoryHeroList = JSON.parse(storedSearchHistory);
+}
 
 // Function to call when the document loads (opacity)
 window.onload = function () {
     document.body.setAttribute("class", "content-loaded")
 };
 
-// Engage function (to display search bar)
-function engageSearch() {
-
-    engageSearchEl.style.display = "none";
-    heroSearchForm.style.display = "flex";
-    mostWantedEl.style.display = "block";
-};
-
-// Engage button event listener
-engageSearchBtn.addEventListener("click", engageSearch);
 
 // Search function
 function heroLocator(heroName) {
 
     // Storage
-    if (searchHistoryHeroList.indexOf(heroName) == -1) {
+    if (searchHistoryHeroList.indexOf(heroName) === -1) {
         searchHistoryHeroList.unshift(heroName);
         searchHistoryHeroList.splice(6);
     }
     
     displaySearchHistoryHeroList();
 
-    localStorage.setItem(STORAGE_FAV_HERO_KEY, JSON.stringify(searchHistoryHeroList));
+    localStorage.setItem(STORAGE_SEARCH_HISTORY_KEY, JSON.stringify(searchHistoryHeroList));
         
         // If no hero name, return error
         if (!heroName) {
@@ -88,17 +57,16 @@ function heroLocator(heroName) {
         let data = jsonData.data;
 
        if (data.total === 0) {
-           wrongHeroEl.style.display = "inline-block";
-           errorMessageEl.innerHTML = "Hero not found. Probably undercover at HYDRA, please try again later.";
-           hydraLogoEl.setAttribute("src", "assets/images/hydra_logo.png");
-           warningMessageEl.innerHTML = "Warning:";
+           $("#wrong-hero").css("display", "inline-block");
+           $("#error-message").html("Hero not found. Probably undercover at HYDRA, please try again later.");
+           $("#hydra-logo").attr("src", "assets/images/hydra_logo.png");
+           $("#warning-message").html("Warning:");
            console.error("No heroes found!");
        } else {
            // Always use the first result
-           wrongHeroEl.style.display = "none";
+           $("#wrong-hero").css("display", "none");
            let result = data.results[0];
-           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
-           let heroID = data.results[0].id;
+           let heroID = result.id;
            showHeroCards(data);
 
            let comicBookUrl = buildApiUrl(`characters/${heroID}/comics`);
@@ -111,50 +79,10 @@ function heroLocator(heroName) {
         console.log("Failed to get hero data!");
     });
 
-    function searchVideos() {
 
-        // YOUTUBE API section ----------------------------------------------
-        //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
-        //"part": ["snippet"],
-        //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
-        //"maxResults": 15,  -> pulling 15 results, incase some don't have ID so we can skip them and display 8
-        //"order": "videoCount", or  "order": "relevance" -> last one seems better results
-        //"q": "surfing" -> what we are looking for?
+    searchVideos(heroName);
+}
 
-        let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=15&order=relevance&q=${heroName}&key=${youTubeAPIKey}`; 
-        $.ajax ({
-            url: youtube2APIURL,
-            method: "GET",
-        }). then (function(youtubeResponse) {
-            $(videoResultEl).empty();
-            let validCount = 0;
-            for (let i = 0; i < youtubeResponse.items.length && validCount < 8; i++ ) {
-                let videoInfo = {
-                    title: youtubeResponse.items[i].snippet.title,
-                    description: youtubeResponse.items[i].snippet.description,
-                    video: youtubeResponse.items[i].id.videoId,
-                };
-                // Not all responses have a videoId for some reason.
-                if (videoInfo.video === undefined) {
-                    continue;
-                }
-                validCount++;
-                let videoCard = $(`
-                  <div class="videoCard">
-                        <div class="videoContainer">
-                         <iframe class="responsive-iframe" src="https://www.youtube.com/embed/${videoInfo.video}" title="Marvel Channel Video"  allow="fullscreen"></iframe>
-                        </div>
-                        <p class="videoTitle">${videoInfo.title}</p>
-                        <p class="videoDescription">${videoInfo.description}</p>                    
-                  </div>
-
-                `);
-                $(videoResultEl).append(videoCard);
-            }
-        });
-    }
-    searchVideos();
-};
 
 
 function displayComicData(comics) {
@@ -162,12 +90,10 @@ function displayComicData(comics) {
     console.log(comics);
 
     comics.results.forEach((comic) => {
-        // let result = comic.results[0];
-        // console.log(result);
         console.log(comic);
         let comicTitle = comic.title;
         let comicThumbnailUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
-        let comicCreator = comic.creators.items[0].name;
+        // let comicCreator = comic.creators.items[0].name;
         let comicInfo = comic.urls[0].url;
     
         const comicCard = `
@@ -185,7 +111,7 @@ function displayComicData(comics) {
         `;
          comicCardContainer.innerHTML += comicCard;
     });
-};
+}
 
 // Separate function to show hero cards
 function showHeroCards(hero) {
@@ -201,6 +127,8 @@ function showHeroCards(hero) {
     let heroComicLink = officialComicLink.url;
     let heroWiki = officialWiki.url;
 
+    heroCardContainer.innerHTML = "";
+    comicCardContainer.innerHTML = "";
     // construct hero card layout
 
     const heroCard = `
@@ -225,13 +153,52 @@ function showHeroCards(hero) {
 
     // append herocard to container
     heroCardContainer.innerHTML += heroCard;
-};
+}
 
 // Function to clear contents of hero card
-function clearHeroCards() {
-    heroCardContainer.innerHTML = "";
-    comicsCardContainer.innerHTML = "";
-};
+
+
+function searchVideos(heroName) {
+
+    // YOUTUBE API section ----------------------------------------------
+    //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
+    //"part": ["snippet"],
+    //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
+    //"maxResults": 10,
+    //"order": "videoCount",
+    //"q": "surfing" -> what we are looking for?
+
+    let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=10&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+    $.ajax ({
+        url: youtube2APIURL,
+        method: "GET",
+    }). then (function(youtubeResponse) {
+        $(videoResultEl).empty();
+        let validCount = 0;
+        for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
+            let videoInfo = {
+                title: youtubeResponse.items[i].snippet.title,
+                description: youtubeResponse.items[i].snippet.description,
+                video: youtubeResponse.items[i].id.videoId,
+            };
+            // Not all responses have a videoId for some reason.
+            if (videoInfo.video === undefined) {
+                continue;
+            }
+            validCount++;
+            let videoCard = $(`
+                <div class="video-item">
+                    <div class="video-wrap">
+                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
+                     <h3>${videoInfo.title}</h3>
+                     <p>${videoInfo.description}</p>
+                    </div>
+                </div>
+                `);
+            $(videoResultEl).append(videoCard);
+        }
+    });
+}
 
 // Search input
 
@@ -239,14 +206,15 @@ function clearHeroCards() {
 function fetchJsonData(url) {
     return fetch(url).then(function(response) {
         if (response.ok) {
-            return response.json()};
+            return response.json()
+        }
         return Promise.reject(response);
     });
-};
+}
 
 function buildApiUrl(apiPath) {
     return `https://gateway.marvel.com/v1/public/${apiPath}?apikey=${marvelPublicAPIKey}`;
-};
+}
 
 /**
  * Repeatedly request heroes from the API to build a list of all heroes. We don't call this as part of the actual
@@ -278,7 +246,7 @@ function buildHeroList() {
         if (currentCount < data.total) {
             return fetchJsonData(characterApiUrl + `&offset=${currentCount}`).then(handleResponse);
         }
-    };
+    }
 
     // Start requesting chunks of data
     fetchJsonData(characterApiUrl).then(handleResponse).then(function() {
@@ -287,7 +255,7 @@ function buildHeroList() {
     }).catch(function(err) {
         console.log("Failed to build hero list: " + err);
     });
-};
+}
 
 function displaySearchHistoryHeroList() {
 
@@ -307,67 +275,81 @@ function displaySearchHistoryHeroList() {
                 'slow');
         });
     });
-};
+}
+
+// Engage function (to display search bar)
+function engageSearch() {
+
+    $("#engageSearchProtocol").css("display","none");
+    $("#heroSearchForm").css("display","flex");
+    $("#most-wanted").css("display", "block");
+}
+
+// Engage button event listener
+$("#engageBtn").click(engageSearch);
+
 
 // Search button event listener
 
-searchButtonEl.addEventListener("click", function (event) {
-    clearHeroCards();
+$(".searchBtn").click(function (event) {
+    event.preventDefault();
     heroLocator(searchInputEl.value);
 
 });
 
-searchInputEl.addEventListener("keyup", function(event) {
+$(".search").on("keyup", function(event) {
     if (event.keyCode === 13) {
-        event.preventDefault();
-        searchButtonEl.click();
+        $(".searchBtn").click();
     }
 });
 
 $(searchInputEl).autocomplete({source: HeroList});
 displaySearchHistoryHeroList();
 
+
+
 // Navigation 
 document.querySelector("#galleryLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "none";
-    locatorEl.style.display = "none";
-    cardResultEl.style.display = "none";
-    videoResultEl.style.display = "none";
-    galleryEl.style.display = "block";
-    aboutUsEl.style.display = "none";
-    footerEl.style.display = "none";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "none");
+    $("#locatorSection").css("display", "none");
+    $("#cardSection").css("display", "none");
+    $("#videoSection").css("display", "none");
+    $("#gallerySection").css("display", "block");
+    $("#aboutUsSection").css("display", "none");
+    $("#footer").css("display", "none");
+}
 
 document.querySelector("#aboutUsLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "none";
-    locatorEl.style.display = "none";
-    cardResultEl.style.display = "none";
-    videoResultEl.style.display = "none";
-    galleryEl.style.display = "none";
-    aboutUsEl.style.display = "block";
-    footerEl.style.display = "none";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "none");
+    $("#locatorSection").css("display", "none");
+    $("#cardSection").css("display", "none");
+    $("#videoSection").css("display", "none");
+    $("#gallerySection").css("display", "none");
+    $("#aboutUsSection").css("display", "block");
+    $("#footer").css("display", "none");
+}
 
 document.querySelector("#homeLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "flex";
-    locatorEl.style.display = "block";
-    cardResultEl.style.display = "block";
-    videoResultEl.style.display = "flex";
-    galleryEl.style.display = "none";
-    aboutUsEl.style.display = "none";
-    footerEl.style.display = "block";
-};
+
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "flex");
+    $("#locatorSection").css("display", "block");
+    $("#cardSection").css("display", "block");
+    $("#videoSection").css("display", "grid");
+    $("#gallerySection").css("display", "none");
+    $("#aboutUsSection").css("display", "none");
+    $("#footer").css("display", "block");
+}
 
 document.querySelector("#locatorLink").onclick = function () {
-    navBarEl.style.display = "block";
-    homeEl.style.display = "flex";
-    locatorEl.style.display = "block";
-    cardResultEl.style.display = "block";
-    videoResultEl.style.display = "flex";
-    galleryEl.style.display = "none";
-    aboutUsEl.style.display = "none";
-    footerEl.style.display = "none";
-};
+    $(".navbar").css("display", "block");
+    $("#homeSection").css("display", "flex");
+    $("#locatorSection").css("display", "block");
+    $("#cardSection").css("display", "block");
+    $("#videoSection").css("display", "grid");
+    $("#gallerySection").css("display", "none");
+    $("#aboutUsSection").css("display", "none");
+    $("#footer").css("display", "none");
+}
