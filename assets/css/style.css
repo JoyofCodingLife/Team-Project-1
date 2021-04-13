@@ -613,14 +613,14 @@ To set the beginning and end state of animation, we use the keywords from and to
 /* ABOUT US SECTION */
 #aboutUsSection {
 	display: none;
-	width: 100%;
-	height: 600px;
+	height: 700px;
 	text-align: center;
 	position: absolute;
 	top: 60px;
 	left: 0;
 	right: 0;
 	background: url(../images/agentsOfShield.jpg) no-repeat center;
+	justify-content: center;
 }
 
 #agentsBehind {
@@ -637,6 +637,7 @@ To set the beginning and end state of animation, we use the keywords from and to
 	float: left;
 	width: 33.33%;
 	background-color: transparent;
+	padding: 10px;
     border: 1px transparent;    /* solid #f1f1f1 */
     perspective: 1000px; /* the 3D effect */
 }
@@ -663,7 +664,7 @@ p span {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-	height: 400px;
+	height: 500px;
 }   
 	
 /* Do an horizontal flip when you move the mouse over the flip box container */
@@ -785,14 +786,38 @@ p span {
 	}
 }
 
-
 @media (max-width: 1200px) {
+	.text-1, .text-2 {
+		font-size: 150px;
+	}
+
 	.videoCard {
 		max-width: 100%;
 	}
+
+	.agentCard {
+		width: 100%;
+	}
+
+	.flip-card-inner {
+		width: 50%;
+		margin: auto;
+	}   
+
+
+		
 }
 
 @media (max-width: 720px) {
+	.text-1, .text-2 {
+		font-size: 110px;
+	}
+
+	.flip-card-inner {
+		width: 100%;
+		margin: auto;
+	}
+
 	.accordion {
 		width: 630px; /* width = ( (Number of images 13 - 1) * 40px ) + 260px + 10px */
 	}
@@ -816,6 +841,10 @@ p span {
 }
 
 @media screen and (max-width: 520px) {
+	.text-1, .text-2 {
+		font-size: 60px;
+	}
+
     .accordion { 
 		width: 450px; /* width = ( (Number of images 13 - 1) * 20px ) + 200px + 10px */ 
 	}
