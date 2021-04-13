@@ -44,10 +44,10 @@ https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
 **So that** my interest keeps growing and I can feel more connected with Marvel Universe.
 
 ## Roadmap
-Our starting point - Wireframe of the website
+Our starting point - This is the initial wireframe of the website from Day 1.
 ![Webpage Draft](./assets/images/websiteWireframe.png)
 
-The Flow Diagram for the website
+This is the User-Flow Diagram for the website.
 ![Webpage Preview](./assets/images/websiteFlowDiagram.png)
 
 ## Webpage Preview
@@ -57,6 +57,9 @@ The following images show the web application's appearance.
 ![Webpage Preview](./assets/images/websiteLoadingScreen.png)
 
 2. This is how search results are displayed on our website. 
+ * Superhero's card with main image, name, ID, link to official Marvel Wiki.
+ * Superhero's 20 comic book appearances, with comic book title and link to find out more & purchase comics from Marvel Website. 
+ * Superhero's top 8 YouTube appearances on Marvel YouTube Channel. 
 ![Webpage Search Results](assets/images/websiteSearchResultsExample.png)
 
 
