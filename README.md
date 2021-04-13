@@ -33,15 +33,15 @@ https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
 * [Korolyova Lara](https://github.com/KorolyovaLara)
 
 ## User Story
-**As an** avid Marvel fan or just Marvel-curious,
+    As an avid Marvel fan or just Marvel-curious,
 
-**I want** to see media related to Marvel characters,
+    I want to see media related to Marvel characters,
 
-**I want** the research to be done for me automatically and 
+    I want the research to be done for me automatically and 
 
-**I want** to be presented with options and choices for character exploration,
+    I want to be presented with options and choices for character exploration,
 
-**So that** my interest keeps growing and I can feel more connected with Marvel Universe.
+    So that my interest keeps growing and I can feel more connected with Marvel Universe.
 
 ## Roadmap
 Our starting point - This is the initial wireframe of the website from Day 1.
