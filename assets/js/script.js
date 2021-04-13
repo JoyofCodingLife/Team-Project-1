@@ -9,7 +9,7 @@ const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
 let searchInputEl = document.querySelector(".search");
 let heroCardContainer = document.querySelector("#heroCardContainer");
 let comicCardContainer = document.querySelector("#comicsCardContainer");
-
+let videoResultEl = document.querySelector("#videoSection");
 
 // Storage
 // localStorage to store user's recently search heroes (will shorten loading screen since data is saved locally)
@@ -67,8 +67,7 @@ function heroLocator(heroName) {
            // Always use the first result
            $("#wrong-hero").css("display", "none");
            let result = data.results[0];
-           let thumbnailUrl = `${result.thumbnail.path}.${result.thumbnail.extension}`;
-           let heroID = data.results[0].id;
+           let heroID = result.id;
            showHeroCards(data);
 
            let comicBookUrl = buildApiUrl(`characters/${heroID}/comics`);
@@ -91,12 +90,10 @@ function displayComicData(comics) {
     console.log(comics);
 
     comics.results.forEach((comic) => {
-        // let result = comic.results[0];
-        // console.log(result);
         console.log(comic);
         let comicTitle = comic.title;
         let comicThumbnailUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
-        let comicCreator = comic.creators.items[0].name;
+        // let comicCreator = comic.creators.items[0].name;
         let comicInfo = comic.urls[0].url;
     
         const comicCard = `
@@ -130,6 +127,8 @@ function showHeroCards(hero) {
     let heroComicLink = officialComicLink.url;
     let heroWiki = officialWiki.url;
 
+    heroCardContainer.innerHTML = "";
+    comicCardContainer.innerHTML = "";
     // construct hero card layout
 
     const heroCard = `
@@ -157,10 +156,7 @@ function showHeroCards(hero) {
 }
 
 // Function to clear contents of hero card
-function clearHeroCards() {
-    heroCardContainer.innerHTML = "";
-    comicCardContainer.innerHTML = "";
-}
+
 
 function searchVideos(heroName) {
 
@@ -177,7 +173,7 @@ function searchVideos(heroName) {
         url: youtube2APIURL,
         method: "GET",
     }). then (function(youtubeResponse) {
-        $("#videoSection").empty();
+        $(videoResultEl).empty();
         let validCount = 0;
         for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
             let videoInfo = {
@@ -199,7 +195,7 @@ function searchVideos(heroName) {
                     </div>
                 </div>
                 `);
-            $("#videoSection").append(videoCard);
+            $(videoResultEl).append(videoCard);
         }
     });
 }
@@ -297,7 +293,6 @@ $("#engageBtn").click(engageSearch);
 
 $(".searchBtn").click(function (event) {
     event.preventDefault();
-    clearHeroCards();
     heroLocator(searchInputEl.value);
 
 });
@@ -309,7 +304,7 @@ $(".search").on("keyup", function(event) {
 
 });
 
-$(".search").autocomplete({source: HeroList});
+$(searchInputEl).autocomplete({source: HeroList});
 displaySearchHistoryHeroList();
 
 
