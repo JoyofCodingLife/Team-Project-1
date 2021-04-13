@@ -32,7 +32,7 @@ https://korolyovalara.github.io/TeamProject-Marvel-Superhero-Locator/
 ## User Story
 **As an** avid Marvel fan or just Marvel-curious,
 
-**I want to** see media related to Marvel characters,
+**I want** to see media related to Marvel characters,
 
 **I want** the research to be done for me automatically and 
 
