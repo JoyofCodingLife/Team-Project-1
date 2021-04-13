@@ -160,18 +160,18 @@ function searchVideos(heroName) {
     //GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM
     //"part": ["snippet"],
     //"channelId": "UCvC4D8onUfXzvjTOM-dBfEA", -> Marvel Entertainment Channel
-    //"maxResults": 10,
-    //"order": "videoCount",
+    //"maxResults": 15,  -> pulling 15 results, incase some don't have ID so we can skip them and display 8
+    //"order": "videoCount", or  "order": "relevance" -> last one seems better results
     //"q": "surfing" -> what we are looking for?
 
-    let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=10&order=videoCount&q=${heroName}&key=${youTubeAPIKey}`;
+    let youtube2APIURL =  `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCvC4D8onUfXzvjTOM-dBfEA&maxResults=15&order=relevance&q=${heroName}&key=${youTubeAPIKey}`;
     $.ajax ({
         url: youtube2APIURL,
         method: "GET",
     }). then (function(youtubeResponse) {
         $(videoResultEl).empty();
         let validCount = 0;
-        for (let i = 0; i < youtubeResponse.items.length && validCount < 5; i++ ) {
+        for (let i = 0; i < youtubeResponse.items.length && validCount < 8; i++ ) {
             let videoInfo = {
                 title: youtubeResponse.items[i].snippet.title,
                 description: youtubeResponse.items[i].snippet.description,
