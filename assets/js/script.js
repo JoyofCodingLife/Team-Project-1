@@ -79,11 +79,8 @@ function heroLocator(heroName) {
         console.log("Failed to get hero data!");
     });
 
-
     searchVideos(heroName);
 }
-
-
 
 function displayComicData(comics) {
 
@@ -157,7 +154,6 @@ function showHeroCards(hero) {
 
 // Function to clear contents of hero card
 
-
 function searchVideos(heroName) {
 
     // YOUTUBE API section ----------------------------------------------
@@ -187,14 +183,14 @@ function searchVideos(heroName) {
             }
             validCount++;
             let videoCard = $(`
-                <div class="video-item">
-                    <div class="video-wrap">
-                     <iframe src="https://www.youtube.com/embed/${videoInfo.video}" title="iframe VideoBox" width="640" height="360" allowfullscreen></iframe>
-                     <h3>${videoInfo.title}</h3>
-                     <p>${videoInfo.description}</p>
-                    </div>
-                </div>
-                `);
+            <div class="videoCard">
+                  <div class="videoContainer">
+                     <iframe class="responsive-iframe" src="https://www.youtube.com/embed/${videoInfo.video}" title="Marvel Channel Video"  allow="fullscreen"></iframe>
+                  </div>
+                  <p class="videoTitle">${videoInfo.title}</p>
+                  <p class="videoDescription">${videoInfo.description}</p>                    
+            </div>
+            `);
             $(videoResultEl).append(videoCard);
         }
     });
@@ -225,7 +221,6 @@ function buildApiUrl(apiPath) {
 */
 
 function buildHeroList() {
-
     // We can't get more than 100 results per request and the default is 20. We use the maximum to reduce number of
     // requests.
     let characterApiUrl = buildApiUrl("characters") + "&limit=100";
@@ -288,7 +283,6 @@ function engageSearch() {
 // Engage button event listener
 $("#engageBtn").click(engageSearch);
 
-
 // Search button event listener
 
 $(".searchBtn").click(function (event) {
@@ -305,8 +299,6 @@ $(".search").on("keyup", function(event) {
 
 $(searchInputEl).autocomplete({source: HeroList});
 displaySearchHistoryHeroList();
-
-
 
 // Navigation 
 document.querySelector("#galleryLink").onclick = function () {
@@ -337,7 +329,7 @@ document.querySelector("#homeLink").onclick = function () {
     $("#homeSection").css("display", "flex");
     $("#locatorSection").css("display", "block");
     $("#cardSection").css("display", "block");
-    $("#videoSection").css("display", "grid");
+    $("#videoSection").css("display", "flex");
     $("#gallerySection").css("display", "none");
     $("#aboutUsSection").css("display", "none");
     $("#footer").css("display", "block");
@@ -348,7 +340,7 @@ document.querySelector("#locatorLink").onclick = function () {
     $("#homeSection").css("display", "flex");
     $("#locatorSection").css("display", "block");
     $("#cardSection").css("display", "block");
-    $("#videoSection").css("display", "grid");
+    $("#videoSection").css("display", "flex");
     $("#gallerySection").css("display", "none");
     $("#aboutUsSection").css("display", "none");
     $("#footer").css("display", "none");

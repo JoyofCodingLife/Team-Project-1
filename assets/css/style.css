@@ -102,16 +102,16 @@ h1:hover {
 	-webkit-animation: glow 1s ease-in-out infinite alternate;
 	-moz-animation: glow 1s ease-in-out infinite alternate;
 	animation: glow 1s ease-in-out infinite alternate;
-  }
+}
   
-  @keyframes glow {
+@keyframes glow {
 	from {
 	  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #069df9, 0 0 40px #069df9, 0 0 50px #069df9, 0 0 60px #069df9, 0 0 70px #069df9;
 	}
 	to {
 	  text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
 	}
-  }
+}
 
 .text-1 {
     font-size: 250px;
@@ -194,7 +194,6 @@ input {
 
 .ui-widget.ui-widget-content {
 	line-height: 1.5;
-
 }
 
 #error-message {
@@ -203,7 +202,6 @@ input {
 #wrong-hero {
 	width: 80%;
 }
-
 
 #hydra-logo {
 	width: 160px;
@@ -217,7 +215,6 @@ input {
 .ui-menu-item:hover {
 	background-color: var(--marvel-red);
 	color: var(--white);
-
 }
 
 .searchBtn {
@@ -426,7 +423,6 @@ To set the beginning and end state of animation, we use the keywords from and to
 	font-weight: bolder;
 	text-transform: uppercase;
 	text-align: center;
-
 }
 
 .comicDetails p {
@@ -447,9 +443,6 @@ To set the beginning and end state of animation, we use the keywords from and to
 
 
 /* RESULT VIDEOS SECTION */
-
-
-/* CARDS */
 #videoSection {
 	display: flex;
 	flex-wrap: wrap;
