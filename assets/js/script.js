@@ -1,7 +1,7 @@
 // List of API keys
     // Spare YouTube API key if reached limit - 1st AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ  2nd AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc
 const marvelPublicAPIKey = "2abb8d4dbef38b7b61728089ea5eb10e";
-const youTubeAPIKey = "AIzaSyDWRsGKQ_E_9GKNMkPoVPj2Pi0P10AJ_Vc";
+const youTubeAPIKey = "AIzaSyBRxfRMSHXHVjrG4_ucs9Sf1tAr2bZ4slQ";
 
 // Define main variables
 
